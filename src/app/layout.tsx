@@ -8,8 +8,14 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: AI_NAME,
-  description: AI_NAME,
+  title: `Aithoria - Grow your Business with Hybrid Intelligence - KI`,
+  description: 'Starte deine digitale Zukunft mit Hybrid Intelligence – optimale KI-Lösungen für dein Unternehmen. → Hier gehts zur Microsoft KI-Roadmap',
+  openGraph: {
+    title: `Aithoria - Grow your Business with Hybrid Intelligence - KI`,
+    description: 'Starte deine digitale Zukunft mit Hybrid Intelligence – optimale KI-Lösungen für dein Unternehmen. → Hier gehts zur Microsoft KI-Roadmap',
+    images: [{url: `https://aithoria.de/wp-content/uploads/2023/06/LogoMitSlogan-1024x266.png`, width: 1024, height: 266}],
+    siteName: `Aithoria - Azure Chat`,
+  }
 };
 
 export const dynamic = "force-dynamic";
