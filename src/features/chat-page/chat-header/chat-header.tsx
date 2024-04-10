@@ -3,7 +3,7 @@ import { CHAT_DEFAULT_PERSONA } from "@/features/theme/theme-config";
 import { VenetianMask } from "lucide-react";
 import { FC } from "react";
 import { ChatDocumentModel, ChatThreadModel } from "../chat-services/models";
-import { DocumentDetail } from "./document-detail";
+// import { DocumentDetail } from "./document-detail";
 import { ExtensionDetail } from "./extension-detail";
 import { PersonaDetail } from "./persona-detail";
 
@@ -21,7 +21,7 @@ export const ChatHeader: FC<Props> = (props) => {
       : props.chatThread.personaMessageTitle;
   return (
     <div className="bg-background border-b flex items-center py-2">
-      <div className="container max-w-3xl flex justify-between items-center">
+      <div className="container px-6 w-full flex justify-between items-center">
         <div className="flex flex-col">
           <span>{props.chatThread.name}</span>
           <span className="text-sm text-muted-foreground flex gap-1 items-center">
@@ -31,7 +31,7 @@ export const ChatHeader: FC<Props> = (props) => {
         </div>
         <div className="flex gap-2">
           <PersonaDetail chatThread={props.chatThread} />
-          <DocumentDetail chatDocuments={props.chatDocuments} />
+          {/* <DocumentDetail chatDocuments={props.chatDocuments} /> */}
           <ExtensionDetail
             disabled={props.chatDocuments.length !== 0}
             extensions={props.extensions}

@@ -88,7 +88,7 @@ export const ChatMessageArea = (props: {
             <Button
               variant={"ghost"}
               size={"sm"}
-              title="Copy text"
+              title="Text kopieren"
               className="justify-right flex"
               onClick={handleButtonClick}
             >

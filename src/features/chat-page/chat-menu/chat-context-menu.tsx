@@ -43,7 +43,7 @@ export const ChatContextMenu = () => {
       <DropdownMenuContent side="right" align="start">
         <DropdownMenuItemWithIcon onClick={async () => await handleAction()}>
           <Trash size={18} />
-          <span>Delete all</span>
+          <span>Alle löschen</span>
         </DropdownMenuItemWithIcon>
       </DropdownMenuContent>
     </DropdownMenu>

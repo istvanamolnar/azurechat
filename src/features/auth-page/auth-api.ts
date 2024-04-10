@@ -12,21 +12,21 @@ const configureIdentityProvider = () => {
     email.toLowerCase().trim()
   );
 
-  if (process.env.AUTH_GITHUB_ID && process.env.AUTH_GITHUB_SECRET) {
-    providers.push(
-      GitHubProvider({
-        clientId: process.env.AUTH_GITHUB_ID!,
-        clientSecret: process.env.AUTH_GITHUB_SECRET!,
-        async profile(profile) {
-          const newProfile = {
-            ...profile,
-            isAdmin: adminEmails?.includes(profile.email.toLowerCase()),
-          };
-          return newProfile;
-        },
-      })
-    );
-  }
+  // if (process.env.AUTH_GITHUB_ID && process.env.AUTH_GITHUB_SECRET) {
+  //   providers.push(
+  //     GitHubProvider({
+  //       clientId: process.env.AUTH_GITHUB_ID!,
+  //       clientSecret: process.env.AUTH_GITHUB_SECRET!,
+  //       async profile(profile) {
+  //         const newProfile = {
+  //           ...profile,
+  //           isAdmin: adminEmails?.includes(profile.email.toLowerCase()),
+  //         };
+  //         return newProfile;
+  //       },
+  //     })
+  //   );
+  // }
 
   if (
     process.env.AZURE_AD_CLIENT_ID &&

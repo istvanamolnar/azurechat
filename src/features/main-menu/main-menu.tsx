@@ -24,7 +24,7 @@ export const MainMenu = async () => {
   return (
     <Menu>
       <MenuBar>
-        <MenuItemContainer>
+        {/* <MenuItemContainer>
           <MenuItem tooltip="Home" asChild>
             <MenuLink href="/chat" ariaLabel="Go to the Home page">
               <Home {...menuIconProps} />
@@ -62,7 +62,7 @@ export const MainMenu = async () => {
               </MenuItem>
             </>
           )}
-        </MenuItemContainer>
+        </MenuItemContainer> */}
         <MenuItemContainer>
           <MenuItem tooltip="Profile">
             <UserProfile />

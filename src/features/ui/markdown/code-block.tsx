@@ -43,7 +43,7 @@ export const CodeBlock: FC<Props> = memo(({ language, children }) => {
         <Button
           variant={"ghost"}
           size={"sm"}
-          title="Copy text"
+          title="Text kopieren"
           className="justify-right flex gap-2"
           onClick={handleButtonClick}
         >

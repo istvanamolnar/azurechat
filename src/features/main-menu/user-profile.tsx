@@ -20,16 +20,19 @@ export const UserProfile = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {session?.user?.image ? (
-          <Avatar className="">
-            <AvatarImage
-              src={session?.user?.image!}
-              alt={session?.user?.name!}
-            />
-          </Avatar>
-        ) : (
-          <CircleUserRound {...menuIconProps} role="button" />
-        )}
+        <div className="w-full flex items-center mx-4">
+          {session?.user?.image ? (
+            <Avatar className="">
+              <AvatarImage
+                src={session?.user?.image!}
+                alt={session?.user?.name!}
+              />
+            </Avatar>
+          ) : (
+            <CircleUserRound {...menuIconProps} role="button" />
+          )}
+          <div className="flex align-center ml-6">{session?.user?.name!}</div>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="right" className="w-56" align="end">
         <DropdownMenuLabel className="font-normal">
@@ -48,7 +51,7 @@ export const UserProfile = () => {
         <DropdownMenuSeparator />
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-medium leading-none">Switch themes</p>
+            <p className="text-sm font-medium leading-none">Themen wechseln</p>
             <ThemeToggle />
           </div>
         </DropdownMenuLabel>
@@ -58,7 +61,7 @@ export const UserProfile = () => {
           onClick={() => signOut({ callbackUrl: "/" })}
         >
           <LogOut {...menuIconProps} size={18} />
-          <span>Log out</span>
+          <span>Abmelden</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

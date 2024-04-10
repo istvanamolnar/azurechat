@@ -9,7 +9,7 @@ const Menu = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("flex h-full", className)} {...props}>
+  <div ref={ref} className={cn("flex mt-auto", className)} {...props}>
     <TooltipProvider>{props.children}</TooltipProvider>
   </div>
 ));
@@ -22,7 +22,7 @@ const MenuBar = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-background z-10 p-2 w-16 flex flex-col justify-between h-full items-stretch border-r",
+      "bg-background z-10 p-2 w-full flex flex-col justify-between h-full items-stretch",
       className
     )}
     {...props}
@@ -40,7 +40,7 @@ const MenuItemContainer = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn(" flex flex-col ", className)} {...props}>
+  <div ref={ref} className={cn("flex flex-col ", className)} {...props}>
     {props.children}
   </div>
 ));

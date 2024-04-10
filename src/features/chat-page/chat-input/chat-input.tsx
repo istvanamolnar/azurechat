@@ -19,7 +19,7 @@ import { ImageInput } from "@/features/ui/chat/chat-input-area/image-input";
 import { Microphone } from "@/features/ui/chat/chat-input-area/microphone";
 import { StopChat } from "@/features/ui/chat/chat-input-area/stop-chat";
 import { SubmitChat } from "@/features/ui/chat/chat-input-area/submit-chat";
-import React, { useRef } from "react";
+import React, { FC, useRef } from "react";
 import { chatStore, useChat } from "../chat-store";
 import { fileStore, useFileStore } from "./file/file-store";
 import { PromptSlider } from "./prompt/prompt-slider";
@@ -31,8 +31,14 @@ import {
   textToSpeechStore,
   useTextToSpeech,
 } from "./speech/use-text-to-speech";
+import { DocumentDetail } from "../chat-header/document-detail";
+import { ChatDocumentModel } from "../chat-services/models";
 
-export const ChatInput = () => {
+interface ChatInputProps {
+  chatDocuments: Array<ChatDocumentModel>;
+}
+
+export const ChatInput: FC<ChatInputProps> = (props) => {
   const { loading, input, chatThreadId } = useChat();
   const { uploadButtonLabel } = useFileStore();
   const { isPlaying } = useTextToSpeech();
@@ -82,6 +88,7 @@ export const ChatInput = () => {
               fileStore.onFileChange({ formData, chatThreadId })
             }
           />
+          <DocumentDetail chatDocuments={props.chatDocuments} />
           <PromptSlider />
         </ChatInputSecondaryActionArea>
         <ChatInputPrimaryActionArea>
