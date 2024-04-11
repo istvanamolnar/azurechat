@@ -32,10 +32,15 @@ import {
   useTextToSpeech,
 } from "./speech/use-text-to-speech";
 import { DocumentDetail } from "../chat-header/document-detail";
-import { ChatDocumentModel } from "../chat-services/models";
+import { ChatDocumentModel, ChatThreadModel } from "../chat-services/models";
+import { ExtensionModel } from "@/features/extensions-page/extension-services/models";
+import { ExtensionDetail } from "../chat-header/extension-detail";
+import { PersonaDetail } from "../chat-header/persona-detail";
 
 interface ChatInputProps {
+  chatThread: ChatThreadModel;
   chatDocuments: Array<ChatDocumentModel>;
+  extensions: Array<ExtensionModel>;
 }
 
 export const ChatInput: FC<ChatInputProps> = (props) => {
@@ -90,6 +95,13 @@ export const ChatInput: FC<ChatInputProps> = (props) => {
           />
           <DocumentDetail chatDocuments={props.chatDocuments} />
           <PromptSlider />
+          <PersonaDetail chatThread={props.chatThread} />
+          <ExtensionDetail
+            disabled={props.chatDocuments.length !== 0}
+            extensions={props.extensions}
+            installedExtensionIds={props.chatThread.extension}
+            chatThreadId={props.chatThread.id}
+          />
         </ChatInputSecondaryActionArea>
         <ChatInputPrimaryActionArea>
           <ImageInput />

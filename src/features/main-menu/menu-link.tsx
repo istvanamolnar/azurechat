@@ -16,7 +16,6 @@ export const MenuLink: FC<MenuLinkProps> = (props) => {
   return (
     <Link
       className={cn(
-        ButtonLinkVariant,
         path.startsWith(props.href) && props.href !== "/" ? "text-primary" : ""
       )}
       href={props.href}

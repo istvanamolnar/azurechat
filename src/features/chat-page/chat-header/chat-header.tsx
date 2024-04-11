@@ -4,13 +4,13 @@ import { VenetianMask } from "lucide-react";
 import { FC } from "react";
 import { ChatDocumentModel, ChatThreadModel } from "../chat-services/models";
 // import { DocumentDetail } from "./document-detail";
-import { ExtensionDetail } from "./extension-detail";
-import { PersonaDetail } from "./persona-detail";
+// import { ExtensionDetail } from "./extension-detail";
+// import { PersonaDetail } from "./persona-detail";
 
 interface Props {
   chatThread: ChatThreadModel;
-  chatDocuments: Array<ChatDocumentModel>;
-  extensions: Array<ExtensionModel>;
+  // chatDocuments: Array<ChatDocumentModel>;
+  // extensions: Array<ExtensionModel>;
 }
 
 export const ChatHeader: FC<Props> = (props) => {
@@ -30,14 +30,14 @@ export const ChatHeader: FC<Props> = (props) => {
           </span>
         </div>
         <div className="flex gap-2">
-          <PersonaDetail chatThread={props.chatThread} />
-          {/* <DocumentDetail chatDocuments={props.chatDocuments} /> */}
+          {/* <PersonaDetail chatThread={props.chatThread} />
+          <DocumentDetail chatDocuments={props.chatDocuments} />
           <ExtensionDetail
             disabled={props.chatDocuments.length !== 0}
             extensions={props.extensions}
             installedExtensionIds={props.chatThread.extension}
             chatThreadId={props.chatThread.id}
-          />
+          /> */}
         </div>
       </div>
     </div>

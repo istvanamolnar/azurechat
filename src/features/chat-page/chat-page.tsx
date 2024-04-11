@@ -45,8 +45,8 @@ export const ChatPage: FC<ChatPageProps> = (props) => {
     <main className="flex flex-1 relative flex-col">
       <ChatHeader
         chatThread={props.chatThread}
-        chatDocuments={props.chatDocuments}
-        extensions={props.extensions}
+        // chatDocuments={props.chatDocuments}
+        // extensions={props.extensions}
       />
       <ChatMessageContainer ref={current}>
         <ChatMessageContentArea>
@@ -72,7 +72,11 @@ export const ChatPage: FC<ChatPageProps> = (props) => {
           {loading === "loading" && <ChatLoading />}
         </ChatMessageContentArea>
       </ChatMessageContainer>
-      <ChatInput chatDocuments={props.chatDocuments}/>
+      <ChatInput
+        chatThread={props.chatThread}
+        chatDocuments={props.chatDocuments}
+        extensions={props.extensions}
+      />
     </main>
   );
 };

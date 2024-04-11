@@ -9,10 +9,11 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 import { menuIconProps } from "@/ui/menu";
-import { CircleUserRound, LogOut } from "lucide-react";
+import { CircleUserRound, LogOut, PocketKnife, VenetianMask } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { ThemeToggle } from "./theme-toggle";
+import { MenuLink } from "./menu-link";
 
 export const UserProfile = () => {
   const { data: session } = useSession();
@@ -54,6 +55,24 @@ export const UserProfile = () => {
             <p className="text-sm font-medium leading-none">Themen wechseln</p>
             <ThemeToggle />
           </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel>
+          <MenuLink href="/persona" ariaLabel="Go to the Persona configuration page">
+            <div className="flex items-center justify-start">
+              <VenetianMask {...menuIconProps} size={18} />
+              <span className="ml-4">{'Persona'}</span>
+            </div>
+          </MenuLink>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel>
+          <MenuLink href="/extensions" ariaLabel="Go to the Extensions configuration page">
+            <div className="flex items-center justify-start">
+              <PocketKnife {...menuIconProps} size={18} />
+              <span className="ml-4">{'Extensions'}</span>
+            </div>
+          </MenuLink>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
