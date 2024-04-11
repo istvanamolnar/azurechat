@@ -20,18 +20,18 @@ export const LogIn: FC<LoginProps> = (props) => {
   return (
     <Card className="flex gap-2 flex-col min-w-[300px]">
       <CardHeader className="gap-2">
-        <CardTitle className="text-2xl flex gap-2">
+        <CardTitle className="text-2xl flex gap-2 justify-center">
           <Avatar className="h-8 w-8">
             <AvatarImage src={"ai-icon.png"} />
           </Avatar>
-          <span className="text-primary">{AI_NAME}</span>
+          <span className="">{AI_NAME}</span>
         </CardTitle>
         <CardDescription>
-          Login in with your Microsoft 365 account
+          Melden Sie sich mit Ihrem Microsoft 365-Konto an
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <Button onClick={() => signIn("azure-ad")}> Microsoft 365</Button>
+        <Button onClick={() => signIn("azure-ad")}>Anmelden</Button>
         {props.isDevMode ? (
           <Button onClick={() => signIn("localdev")}>
             Basic Auth (DEV ONLY)
