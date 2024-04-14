@@ -9,12 +9,13 @@ import {
 } from "eventsource-parser";
 import { FormEvent } from "react";
 import { proxy, useSnapshot } from "valtio";
-import { RevalidateCache } from "../common/navigation-helpers";
+import { RedirectToChatThread, RevalidateCache } from "../common/navigation-helpers";
 import { InputImageStore } from "../ui/chat/chat-input-area/input-image-store";
 import { textToSpeechStore } from "./chat-input/speech/use-text-to-speech";
 import { ResetInputRows } from "./chat-input/use-chat-input-dynamic-height";
 import {
   AddExtensionToChatThread,
+  CreateChatThread,
   RemoveExtensionFromChatThread,
   UpdateChatTitle,
 } from "./chat-services/chat-thread-service";
@@ -63,12 +64,12 @@ class ChatState {
     messages,
     chatThread,
   }: {
-    chatThread: ChatThreadModel;
+    chatThread?: ChatThreadModel;
     userName: string;
     messages: Array<ChatMessageModel>;
   }) {
     this.chatThread = chatThread;
-    this.chatThreadId = chatThread.id;
+    this.chatThreadId = chatThread?.id || '';
     this.messages = messages;
     this.userName = userName;
   }
@@ -129,7 +130,7 @@ class ChatState {
     InputImageStore.Reset();
   }
 
-  private async chat(formData: FormData) {
+  private async chat(formData: FormData, isNew: boolean) {
     this.updateAutoScroll(true);
     this.loading = "loading";
 
@@ -166,91 +167,96 @@ class ChatState {
         signal: controller.signal,
       });
 
-      const onParse = (event: ParsedEvent | ReconnectInterval) => {
-        if (event.type === "event") {
-          const responseType = JSON.parse(event.data) as AzureChatCompletion;
-          switch (responseType.type) {
-            case "functionCall":
-              const mappedFunction: ChatMessageModel = {
-                id: uniqueId(),
-                content: responseType.response.arguments,
-                name: responseType.response.name,
-                role: "function",
-                createdAt: new Date(),
-                isDeleted: false,
-                threadId: this.chatThreadId,
-                type: "CHAT_MESSAGE",
-                userId: "",
-                multiModalImage: "",
-              };
-              this.addToMessages(mappedFunction);
-              break;
-            case "functionCallResult":
-              const mappedFunctionResult: ChatMessageModel = {
-                id: uniqueId(),
-                content: responseType.response,
-                name: "tool",
-                role: "tool",
-                createdAt: new Date(),
-                isDeleted: false,
-                threadId: this.chatThreadId,
-                type: "CHAT_MESSAGE",
-                userId: "",
-                multiModalImage: "",
-              };
-              this.addToMessages(mappedFunctionResult);
-              break;
-            case "content":
-              const mappedContent: ChatMessageModel = {
-                id: responseType.response.id,
-                content: responseType.response.choices[0].message.content || "",
-                name: AI_NAME,
-                role: "assistant",
-                createdAt: new Date(),
-                isDeleted: false,
-                threadId: this.chatThreadId,
-                type: "CHAT_MESSAGE",
-                userId: "",
-                multiModalImage: "",
-              };
-
-              this.addToMessages(mappedContent);
-              this.lastMessage = mappedContent.content;
-
-              break;
-            case "abort":
-              this.removeMessage(newUserMessage.id);
-              this.loading = "idle";
-              break;
-            case "error":
-              showError(responseType.response);
-              this.loading = "idle";
-              break;
-            case "finalContent":
-              this.loading = "idle";
-              this.completed(this.lastMessage);
-              this.updateTitle();
-              break;
-            default:
-              break;
-          }
-        }
-      };
-
-      if (response.body) {
-        const parser = createParser(onParse);
-
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let done = false;
-        while (!done) {
-          const { value, done: doneReading } = await reader.read();
-          done = doneReading;
-
-          const chunkValue = decoder.decode(value);
-          parser.feed(chunkValue);
-        }
+      if (isNew && response.status === 200) {
         this.loading = "idle";
+        RedirectToChatThread(this.chatThreadId);
+      } else {
+        const onParse = (event: ParsedEvent | ReconnectInterval) => {
+          if (event.type === "event") {
+            const responseType = JSON.parse(event.data) as AzureChatCompletion;
+            switch (responseType.type) {
+              case "functionCall":
+                const mappedFunction: ChatMessageModel = {
+                  id: uniqueId(),
+                  content: responseType.response.arguments,
+                  name: responseType.response.name,
+                  role: "function",
+                  createdAt: new Date(),
+                  isDeleted: false,
+                  threadId: this.chatThreadId,
+                  type: "CHAT_MESSAGE",
+                  userId: "",
+                  multiModalImage: "",
+                };
+                this.addToMessages(mappedFunction);
+                break;
+              case "functionCallResult":
+                const mappedFunctionResult: ChatMessageModel = {
+                  id: uniqueId(),
+                  content: responseType.response,
+                  name: "tool",
+                  role: "tool",
+                  createdAt: new Date(),
+                  isDeleted: false,
+                  threadId: this.chatThreadId,
+                  type: "CHAT_MESSAGE",
+                  userId: "",
+                  multiModalImage: "",
+                };
+                this.addToMessages(mappedFunctionResult);
+                break;
+              case "content":
+                const mappedContent: ChatMessageModel = {
+                  id: responseType.response.id,
+                  content: responseType.response.choices[0].message.content || "",
+                  name: AI_NAME,
+                  role: "assistant",
+                  createdAt: new Date(),
+                  isDeleted: false,
+                  threadId: this.chatThreadId,
+                  type: "CHAT_MESSAGE",
+                  userId: "",
+                  multiModalImage: "",
+                };
+
+                this.addToMessages(mappedContent);
+                this.lastMessage = mappedContent.content;
+
+                break;
+              case "abort":
+                this.removeMessage(newUserMessage.id);
+                this.loading = "idle";
+                break;
+              case "error":
+                showError(responseType.response);
+                this.loading = "idle";
+                break;
+              case "finalContent":
+                this.loading = "idle";
+                this.completed(this.lastMessage);
+                this.updateTitle();
+                break;
+              default:
+                break;
+            }
+          }
+        };
+
+        if (response.body) {
+          const parser = createParser(onParse);
+
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let done = false;
+          while (!done) {
+            const { value, done: doneReading } = await reader.read();
+            done = doneReading;
+
+            const chunkValue = decoder.decode(value);
+            parser.feed(chunkValue);
+          }
+          this.loading = "idle";
+        }
       }
     } catch (error) {
       showError("" + error);
@@ -272,22 +278,27 @@ class ChatState {
     textToSpeechStore.speak(message);
   }
 
-  public async submitChat(e: FormEvent<HTMLFormElement>) {
+  public async submitChat(e: FormEvent<HTMLFormElement>, isNew: boolean) {
     e.preventDefault();
     if (this.input === "" || this.loading !== "idle") {
       return;
     }
+    if (isNew) {
+      const newChatThread = await CreateChatThread();
+      if (newChatThread.status === "OK") {
+        this.chatThreadId = newChatThread.response?.id;
+      }
+    }
 
     // get form data from e
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(e.currentTarget || undefined);
 
     const body = JSON.stringify({
       id: this.chatThreadId,
       message: this.input,
     });
     formData.append("content", body);
-
-    this.chat(formData);
+    this.chat(formData, isNew);
   }
 }
 

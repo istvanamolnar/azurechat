@@ -1,5 +1,6 @@
 "use client";
 
+import { NEW_CHAT_NAME } from "@/features/theme/theme-config";
 import { Button } from "@/features/ui/button";
 import { LoadingIndicator } from "@/features/ui/loading";
 import { Plus } from "lucide-react";
@@ -16,7 +17,7 @@ export const NewChat = () => {
       variant={"outline"}
     >
       {pending ? <LoadingIndicator isLoading={pending} /> : <Plus size={18} />}
-      Neuer Chat
+      {NEW_CHAT_NAME}
     </Button>
   );
 };

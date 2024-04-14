@@ -1,6 +1,6 @@
 export const AI_NAME = "Aithoria - Azure Chat";
 export const AI_DESCRIPTION = "Grow your Business with Hybrid Intelligence - KI";
-export const CHAT_DEFAULT_PERSONA = AI_NAME + " default";
+export const CHAT_DEFAULT_PERSONA = AI_NAME + " (Standard)";
 
 export const CHAT_DEFAULT_SYSTEM_PROMPT = `You are a friendly ${AI_NAME} AI assistant. You must always return in markdown format.
 

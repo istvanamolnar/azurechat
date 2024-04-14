@@ -19,7 +19,7 @@ import MessageContent from "./message-content";
 
 interface ChatPageProps {
   messages: Array<ChatMessageModel>;
-  chatThread: ChatThreadModel;
+  chatThread?: ChatThreadModel;
   chatDocuments: Array<ChatDocumentModel>;
   extensions: Array<ExtensionModel>;
 }

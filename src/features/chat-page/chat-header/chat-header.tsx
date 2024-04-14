@@ -8,22 +8,22 @@ import { ChatDocumentModel, ChatThreadModel } from "../chat-services/models";
 // import { PersonaDetail } from "./persona-detail";
 
 interface Props {
-  chatThread: ChatThreadModel;
+  chatThread?: ChatThreadModel;
   // chatDocuments: Array<ChatDocumentModel>;
   // extensions: Array<ExtensionModel>;
 }
 
 export const ChatHeader: FC<Props> = (props) => {
   const persona =
-    props.chatThread.personaMessageTitle === "" ||
-    props.chatThread.personaMessageTitle === undefined
+    props.chatThread?.personaMessageTitle === "" ||
+    props.chatThread?.personaMessageTitle === undefined
       ? CHAT_DEFAULT_PERSONA
-      : props.chatThread.personaMessageTitle;
+      : props.chatThread?.personaMessageTitle;
   return (
     <div className="bg-background border-b flex items-center py-2">
       <div className="container px-6 w-full flex justify-between items-center">
         <div className="flex flex-col">
-          <span>{props.chatThread.name}</span>
+          <span>{props.chatThread?.name || 'Neuer Chat (Entwurf)'}</span>
           <span className="text-sm text-muted-foreground flex gap-1 items-center">
             <VenetianMask size={18} />
             {persona}

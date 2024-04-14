@@ -1,4 +1,4 @@
-import { ChatHome } from "@/features/chat-home-page/chat-home";
+import { ChatPage } from "@/features/chat-page/chat-page";
 import { FindAllExtensionForCurrentUser } from "@/features/extensions-page/extension-services/extension-service";
 import { FindAllPersonaForCurrentUser } from "@/features/persona-page/persona-services/persona-service";
 import { DisplayError } from "@/features/ui/error/display-error";
@@ -17,8 +17,9 @@ export default async function Home() {
     return <DisplayError errors={extensionResponse.errors} />;
   }
   return (
-    <ChatHome
-      personas={personaResponse.response}
+    <ChatPage
+      messages={[]}
+      chatDocuments={[]}
       extensions={extensionResponse.response}
     />
   );

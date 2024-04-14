@@ -15,7 +15,7 @@ import { chatStore } from "../chat-store";
 
 interface Props {
   extensions: Array<ExtensionModel>;
-  chatThreadId: string;
+  chatThreadId?: string;
   installedExtensionIds: Array<string> | undefined;
   disabled: boolean;
 }

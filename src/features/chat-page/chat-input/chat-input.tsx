@@ -38,7 +38,7 @@ import { ExtensionDetail } from "../chat-header/extension-detail";
 import { PersonaDetail } from "../chat-header/persona-detail";
 
 interface ChatInputProps {
-  chatThread: ChatThreadModel;
+  chatThread?: ChatThreadModel;
   chatDocuments: Array<ChatDocumentModel>;
   extensions: Array<ExtensionModel>;
 }
@@ -64,7 +64,8 @@ export const ChatInput: FC<ChatInputProps> = (props) => {
       ref={formRef}
       onSubmit={(e) => {
         e.preventDefault();
-        chatStore.submitChat(e);
+        const isNew = !props.chatThread?.id;
+        chatStore.submitChat(e, isNew);
       }}
       status={uploadButtonLabel}
     >
@@ -99,8 +100,8 @@ export const ChatInput: FC<ChatInputProps> = (props) => {
           <ExtensionDetail
             disabled={props.chatDocuments.length !== 0}
             extensions={props.extensions}
-            installedExtensionIds={props.chatThread.extension}
-            chatThreadId={props.chatThread.id}
+            installedExtensionIds={[]}
+            chatThreadId={props.chatThread?.id}
           />
         </ChatInputSecondaryActionArea>
         <ChatInputPrimaryActionArea>

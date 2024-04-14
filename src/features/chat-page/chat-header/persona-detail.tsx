@@ -14,12 +14,12 @@ import { FC } from "react";
 import { ChatThreadModel } from "../chat-services/models";
 
 interface Props {
-  chatThread: ChatThreadModel;
+  chatThread?: ChatThreadModel;
 }
 
 export const PersonaDetail: FC<Props> = (props) => {
-  const persona = props.chatThread.personaMessageTitle;
-  const personaMessage = props.chatThread.personaMessage;
+  const persona = props.chatThread?.personaMessageTitle;
+  const personaMessage = props.chatThread?.personaMessage;
   return (
     <Sheet>
       <SheetTrigger asChild>
