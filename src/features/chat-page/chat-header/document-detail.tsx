@@ -7,9 +7,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/features/ui/sheet";
-import { File } from "lucide-react";
+import { File, Trash } from "lucide-react";
 import { FC } from "react";
 import { ChatDocumentModel } from "../chat-services/models";
+import { SoftDeleteChatDocument } from "../chat-services/chat-document-service";
 
 interface Props {
   chatDocuments: Array<ChatDocumentModel>;
@@ -32,7 +33,11 @@ export const DocumentDetail: FC<Props> = (props) => {
             {props.chatDocuments.map((doc) => {
               return (
                 <div className="flex gap-2 items-center" key={doc.id}>
-                  <File size={16} /> <div>{doc.name}</div>
+                  <File size={16} />
+                  <div>{doc.name}</div>
+                  <div onClick={() => SoftDeleteChatDocument(doc)}>
+                    <Trash size={18} />
+                  </div>
                 </div>
               );
             })}

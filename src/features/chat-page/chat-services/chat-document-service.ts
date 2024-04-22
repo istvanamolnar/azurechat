@@ -209,6 +209,46 @@ export const CreateChatDocument = async (
   }
 };
 
+export async function SoftDeleteChatDocument(
+  doc: ChatDocumentModel
+): Promise<ServerActionResponse<boolean>> {
+  try {
+    if (window.confirm('Sind Sie sicher, dass Sie dieses Dokument löschen möchten?')) {
+      const { resource } = await HistoryContainer().items.upsert<ChatDocumentModel>(
+        {
+          ...doc,
+          isDeleted: true,
+        }
+      );
+  
+      if (resource) {
+        return {
+          status: "OK",
+          response: true,
+        };
+      }
+    }
+
+    return {
+      status: "ERROR",
+      errors: [
+        {
+          message: "Unable to delete chat document",
+        },
+      ],
+    };
+  } catch (e) {
+    return {
+      status: "ERROR",
+      errors: [
+        {
+          message: `${e}`,
+        },
+      ],
+    };
+  }
+}
+
 export async function ChunkDocumentWithOverlap(
   document: string
 ): Promise<string[]> {
