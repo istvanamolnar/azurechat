@@ -29,18 +29,18 @@ export default async function RootLayout({
   }
 
   return (
-    <div className={cn("flex flex-1 items-stretch")}>
-      <div className="flex-1 flex grow">
-        <MenuTray>
+    <div className="flex flex-1 grow">
+      <div className={cn("flex flex-col relative")}>
+        <MenuTray className={cn("flex flex-col grow")}>
           <ChatMenuHeader />
           <ScrollArea>
             <ChatMenu menuItems={chatHistoryResponse.response} />
           </ScrollArea>
           <MainMenu />
-          <MenuTrayToggle />
         </MenuTray>
-        {children}
+        <MenuTrayToggle />
       </div>
+      {children}
     </div>
   );
 }

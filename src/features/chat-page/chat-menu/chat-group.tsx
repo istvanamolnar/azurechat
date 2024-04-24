@@ -11,20 +11,21 @@ export const ChatGroup = (props: Props) => {
     <div className="flex flex-col">
       {props.numOfItems > 0 ? (
         <Accordion
+          defaultValue={["item-1"]}
           type="multiple"
-          className="bg-background rounded-md border"
+          className="bg-background rounded-md"
         >
           <AccordionItem value="item-1" className="">
-            <AccordionTrigger className="text-sm py-1 items-center gap-2">
-              <div className="font-bold text-muted-foreground p-3">{props.title}</div>
+            <AccordionTrigger className="justify-start py-1 items-center gap-2 cursor-pointer">
+              <div className="font-light text-muted-foreground p-3">{props.title}</div>
             </AccordionTrigger>
             <AccordionContent>
-              <div>{props.children}</div>
+              <div className="font-medium">{props.children}</div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
       ) : (
-        <div className="font-bold text-muted-foreground p-3">{props.title}</div>
+        <div className="text-muted-foreground p-3">{props.title}</div>
       )}
     </div>
   );
