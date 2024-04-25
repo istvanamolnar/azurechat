@@ -18,7 +18,7 @@ export const MenuTrayToggle = () => {
         transform: 'translate(100%, -50%)',
         right: 0,
         width: "2.5rem",
-        zIndex: 100
+        zIndex: 49
       }}
     >
       <ChevronLeft

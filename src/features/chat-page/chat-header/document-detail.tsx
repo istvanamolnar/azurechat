@@ -1,16 +1,40 @@
+"use client";
 import { Button } from "@/features/ui/button";
-
 import { File, Trash } from "lucide-react";
 import { FC } from "react";
 import { ChatDocumentModel } from "../chat-services/models";
 import { SoftDeleteChatDocument } from "../chat-services/chat-document-service";
 import { Popover, PopoverContent, PopoverTrigger } from "@/features/ui/popover";
+import React from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
+} from "@/features/ui/alert-dialog";
 
 interface Props {
   chatDocuments: Array<ChatDocumentModel>;
 }
 
 export const DocumentDetail: FC<Props> = (props) => {
+  const [isConfirmed, setIsConfirmed] = React.useState(false);
+  const [documentToDelete, setDocumentToDelete] = React.useState<ChatDocumentModel | null>(null);
+
+  React.useEffect(() => {
+    if (isConfirmed && documentToDelete) {
+      console.log('delete');
+
+      SoftDeleteChatDocument(documentToDelete);
+      setDocumentToDelete(null);
+      setIsConfirmed(false);
+    }
+  }, [isConfirmed, documentToDelete]);
+
   return (
     <div className="absolute right-4 top-4">
       <Popover>
@@ -27,7 +51,7 @@ export const DocumentDetail: FC<Props> = (props) => {
                 <div>{doc.name}</div>
                 <div
                   className="cursor-pointer hover:bg-accent"
-                  onClick={() => SoftDeleteChatDocument(doc)}
+                  onClick={() => setDocumentToDelete(doc)}
                   title="Dokument löschen"
                 >
                   <Trash size={18} />
@@ -37,6 +61,30 @@ export const DocumentDetail: FC<Props> = (props) => {
           })}
         </PopoverContent>
       </Popover>
+      {documentToDelete &&
+        <AlertDialog open>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Dokumentlöschung</AlertDialogTitle>
+              <AlertDialogDescription>
+                {`Wollen Sie die Datei "${documentToDelete.name}" wirklich löschen?`}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel
+                onClick={() => setIsConfirmed(false)}
+              >
+                Abbrechen
+              </AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => setIsConfirmed(true)}
+              >
+                Bestätigen
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      }
     </div>
     // <Sheet>
     //   <SheetTrigger asChild>
