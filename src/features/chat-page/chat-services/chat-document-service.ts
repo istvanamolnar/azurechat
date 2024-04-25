@@ -213,21 +213,18 @@ export async function SoftDeleteChatDocument(
   doc: ChatDocumentModel
 ): Promise<ServerActionResponse<boolean>> {
   try {
-    const isClient = typeof window !== "undefined";
-    if (isClient && window.confirm('Sind Sie sicher, dass Sie dieses Dokument löschen möchten?')) {
-      const { resource } = await HistoryContainer().items.upsert<ChatDocumentModel>(
-        {
-          ...doc,
-          isDeleted: true,
-        }
-      );
-  
-      if (resource) {
-        return {
-          status: "OK",
-          response: true,
-        };
+    const { resource } = await HistoryContainer().items.upsert<ChatDocumentModel>(
+      {
+        ...doc,
+        isDeleted: true,
       }
+    );
+
+    if (resource) {
+      return {
+        status: "OK",
+        response: true,
+      };
     }
 
     return {

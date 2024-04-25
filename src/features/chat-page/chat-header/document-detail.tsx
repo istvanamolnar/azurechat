@@ -27,13 +27,13 @@ export const DocumentDetail: FC<Props> = (props) => {
 
   React.useEffect(() => {
     if (isConfirmed && documentToDelete) {
-      console.log('delete');
-
       SoftDeleteChatDocument(documentToDelete);
       setDocumentToDelete(null);
       setIsConfirmed(false);
     }
   }, [isConfirmed, documentToDelete]);
+
+  if (!props.chatDocuments.length) return null;
 
   return (
     <div className="absolute right-4 top-4">
