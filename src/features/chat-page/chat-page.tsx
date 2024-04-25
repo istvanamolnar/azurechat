@@ -16,6 +16,7 @@ import {
   ChatThreadModel,
 } from "./chat-services/models";
 import MessageContent from "./message-content";
+import { DocumentDetail } from "./chat-header/document-detail";
 
 interface ChatPageProps {
   messages: Array<ChatMessageModel>;
@@ -45,10 +46,11 @@ export const ChatPage: FC<ChatPageProps> = (props) => {
     <main className="flex flex-1 relative flex-col">
       <ChatHeader
         chatThread={props.chatThread}
-        // chatDocuments={props.chatDocuments}
-        // extensions={props.extensions}
+      // chatDocuments={props.chatDocuments}
+      // extensions={props.extensions}
       />
       <ChatMessageContainer ref={current}>
+        <DocumentDetail chatDocuments={props.chatDocuments} />
         <ChatMessageContentArea>
           {messages.map((message) => {
             return (
