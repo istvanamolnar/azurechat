@@ -16,6 +16,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle
 } from "@/features/ui/alert-dialog";
+import { cn } from "@/features/ui/lib";
 
 interface Props {
   chatDocuments: Array<ChatDocumentModel>;
@@ -44,9 +45,16 @@ export const DocumentDetail: FC<Props> = (props) => {
           </Button>
         </PopoverTrigger>
         <PopoverContent>
-          {props.chatDocuments.map((doc) => {
+          {props.chatDocuments.map((doc, index) => {
+            const isLastItem = index === props.chatDocuments.length - 1;
             return (
-              <div className="flex gap-2 items-center font-normal" key={doc.id}>
+              <div
+                className={cn(
+                  "flex gap-2 items-center font-normal p-2",
+                  !isLastItem && "border-b-1 border-accent"
+                )}
+                key={doc.id}
+              >
                 <File size={16} />
                 <div>{doc.name}</div>
                 <div
