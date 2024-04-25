@@ -32,7 +32,11 @@ export const DocumentDetail: FC<Props> = (props) => {
               <DropdownMenuItem className="flex gap-2 items-center font-normal" key={doc.id}>
                 <File size={16} />
                 <div>{doc.name}</div>
-                <div onClick={() => SoftDeleteChatDocument(doc)}>
+                <div
+                  className="cursor-pointer hover:bg-accent"
+                  onClick={() => SoftDeleteChatDocument(doc)}
+                  title="Dokument löschen"
+                >
                   <Trash size={18} />
                 </div>
               </DropdownMenuItem>
