@@ -31,7 +31,7 @@ import {
   textToSpeechStore,
   useTextToSpeech,
 } from "./speech/use-text-to-speech";
-import { DocumentDetail } from "../chat-header/document-detail";
+// import { DocumentDetail } from "../chat-header/document-detail";
 import { ChatDocumentModel, ChatThreadModel } from "../chat-services/models";
 import { ExtensionModel } from "@/features/extensions-page/extension-services/models";
 import { ExtensionDetail } from "../chat-header/extension-detail";
@@ -94,7 +94,7 @@ export const ChatInput: FC<ChatInputProps> = (props) => {
               fileStore.onFileChange({ formData, chatThreadId })
             }
           />
-          <DocumentDetail chatDocuments={props.chatDocuments} />
+          {/* <DocumentDetail chatDocuments={props.chatDocuments} /> */}
           <PromptSlider />
           <PersonaDetail chatThread={props.chatThread} />
           <ExtensionDetail
