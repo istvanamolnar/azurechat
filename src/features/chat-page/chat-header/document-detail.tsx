@@ -1,17 +1,10 @@
 import { Button } from "@/features/ui/button";
-import { ScrollArea } from "@/features/ui/scroll-area";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/features/ui/sheet";
+
 import { File, Trash } from "lucide-react";
 import { FC } from "react";
 import { ChatDocumentModel } from "../chat-services/models";
 import { SoftDeleteChatDocument } from "../chat-services/chat-document-service";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/features/ui/dropdown-menu";
+import { Popover, PopoverContent, PopoverTrigger } from "@/features/ui/popover";
 
 interface Props {
   chatDocuments: Array<ChatDocumentModel>;
@@ -19,17 +12,17 @@ interface Props {
 
 export const DocumentDetail: FC<Props> = (props) => {
   return (
-    <div className="absolute right-0">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+    <div className="absolute right-4 top-4">
+      <Popover>
+        <PopoverTrigger>
           <Button variant={"ghost"} className="gap-2" aria-label="Current Chat Documents Menu">
             <File size={16} /> {props.chatDocuments.length}
           </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent side="bottom" className="w-72" align="end">
+        </PopoverTrigger>
+        <PopoverContent>
           {props.chatDocuments.map((doc) => {
             return (
-              <DropdownMenuItem className="flex gap-2 items-center font-normal" key={doc.id}>
+              <div className="flex gap-2 items-center font-normal" key={doc.id}>
                 <File size={16} />
                 <div>{doc.name}</div>
                 <div
@@ -39,11 +32,11 @@ export const DocumentDetail: FC<Props> = (props) => {
                 >
                   <Trash size={18} />
                 </div>
-              </DropdownMenuItem>
+              </div>
             );
           })}
-        </DropdownMenuContent>
-      </DropdownMenu>
+        </PopoverContent>
+      </Popover>
     </div>
     // <Sheet>
     //   <SheetTrigger asChild>
