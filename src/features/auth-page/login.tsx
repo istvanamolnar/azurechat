@@ -27,7 +27,7 @@ export const LogIn: FC<LoginProps> = (props) => {
           <span className="">{AI_NAME}</span>
         </CardTitle>
         <CardDescription>
-          Melden Sie sich mit Ihrem Microsoft 365-Konto an
+          Melden Sie sich mit Ihrem Microsoft 365-Konto an.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
