@@ -18,6 +18,7 @@ import { getCurrentUser } from "../auth-page/helpers";
 import { MenuLink } from "./menu-link";
 import { UserProfile } from "./user-profile";
 import initTranslations from '@/app/i18n';
+import Image from "next/image";
 
 export const MainMenu = async ({locale}: { locale: 'de' | 'en' }) => {
   const { t } = await initTranslations(locale, ['mainMenu']);
@@ -29,7 +30,14 @@ export const MainMenu = async ({locale}: { locale: 'de' | 'en' }) => {
         <MenuItemContainer>
           <MenuItem tooltip={t('homePage')} asChild>
             <MenuLink href="/chat" ariaLabel="Go to the Home page">
-              <Home {...menuIconProps} />
+              {/* <Home {...menuIconProps} /> */}
+              <Image
+                src={"/ai-icon.png"}
+                width={24}
+                height={24}
+                quality={50}
+                alt="home-icon"
+              />
             </MenuLink>
           </MenuItem>
           <MenuTrayToggle />
