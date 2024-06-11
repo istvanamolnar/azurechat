@@ -14,15 +14,9 @@ const requireAuth: string[] = [
 const requireAdmin: string[] = ["/data-source", "/reporting"];
 
 export async function middleware(request: NextRequest) {
-  // Apply i18nRouter middleware
-  const i18nResponse = i18nRouter(request, i18nConfig);
-  if (i18nResponse) {
-    return i18nResponse;
-  }
-
   const res = NextResponse.next();
   const pathname = request.nextUrl.pathname;
-
+  console.log(pathname);
   if (requireAuth.some((path) => pathname.startsWith(path))) {
     const token = await getToken({
       req: request,
@@ -41,6 +35,12 @@ export async function middleware(request: NextRequest) {
         return NextResponse.rewrite(url);
       }
     }
+  }
+
+  // Apply i18nRouter middleware
+  const i18nResponse = i18nRouter(request, i18nConfig);
+  if (i18nResponse) {
+    return i18nResponse;
   }
 
   return res;

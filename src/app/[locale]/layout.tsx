@@ -7,7 +7,7 @@ import initTranslations from '../i18n';
 import TranslationsProvider from '@/utils/providers/translations-provider';
 
 import { Inter } from "next/font/google";
-import "../globals.css";
+import "@/app/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
