@@ -2,8 +2,10 @@
 import { Tabs, TabsList, TabsTrigger } from "@/ui/tabs";
 import { Laptop2, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useTranslation } from 'react-i18next';
 
 export const ThemeToggle = () => {
+  const { t } = useTranslation();
   const { setTheme, theme } = useTheme();
 
   return (
@@ -13,7 +15,7 @@ export const ThemeToggle = () => {
           value="light"
           onClick={() => setTheme("light")}
           className="flex-1"
-          title="Helles Thema"
+          title={t('mainMenu:themes.light')}
         >
           <Sun size={18} />
         </TabsTrigger>
@@ -21,7 +23,7 @@ export const ThemeToggle = () => {
           value="dark"
           onClick={() => setTheme("dark")}
           className="flex-1"
-          title="Dunkles Thema"
+          title={t('mainMenu:themes.dark')}
         >
           <Moon size={18} />
         </TabsTrigger>
@@ -29,7 +31,7 @@ export const ThemeToggle = () => {
           value="system"
           onClick={() => setTheme("system")}
           className="flex-1"
-          title="Systemmodus"
+          title={t('mainMenu:themes.system')}
         >
           <Laptop2 size={18} />
         </TabsTrigger>

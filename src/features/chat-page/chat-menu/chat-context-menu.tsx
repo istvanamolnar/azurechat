@@ -11,8 +11,10 @@ import { MoreVertical, Trash } from "lucide-react";
 import { useState } from "react";
 import { DropdownMenuItemWithIcon } from "./chat-menu-item";
 import { DeleteAllChatThreads } from "./chat-menu-service";
+import { useTranslation } from 'react-i18next';
 
 export const ChatContextMenu = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAction = async () => {
@@ -43,7 +45,7 @@ export const ChatContextMenu = () => {
       <DropdownMenuContent side="right" align="start">
         <DropdownMenuItemWithIcon onClick={async () => await handleAction()}>
           <Trash size={18} />
-          <span>Alle löschen</span>
+          <span>{t('chat:deleteAll')}</span>
         </DropdownMenuItemWithIcon>
       </DropdownMenuContent>
     </DropdownMenu>

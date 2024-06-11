@@ -11,12 +11,14 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { useTranslation } from 'react-i18next';
 
 interface LoginProps {
   isDevMode: boolean;
 }
 
 export const LogIn: FC<LoginProps> = (props) => {
+  const { t } = useTranslation();
   return (
     <Card className="flex gap-2 flex-col min-w-[300px]">
       <CardHeader className="gap-2">
@@ -27,12 +29,14 @@ export const LogIn: FC<LoginProps> = (props) => {
           <span className="text-primary">{AI_NAME}</span>
         </CardTitle>
         <CardDescription>
-          Melden Sie sich mit Ihrem Microsoft 365-Konto an.
+          {t('auth:loginMessage')}
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
         {/* <Button onClick={() => signIn("github")}>GitHub</Button> */}
-        <Button onClick={() => signIn("azure-ad")}>Anmelden</Button>
+        <Button onClick={() => signIn("azure-ad")}>
+          {t('auth:loginButtonLabel')}
+        </Button>
         {props.isDevMode ? (
           <Button onClick={() => signIn("localdev")}>
             Basic Auth (DEV ONLY)

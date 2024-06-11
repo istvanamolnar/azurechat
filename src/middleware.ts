@@ -1,5 +1,7 @@
+import { NextResponse, type NextRequest } from 'next/server';
+import { i18nRouter } from 'next-i18n-router';
+import i18nConfig from './i18nConfig';
 import { getToken } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
 
 const requireAuth: string[] = [
   "/chat",
@@ -12,6 +14,12 @@ const requireAuth: string[] = [
 const requireAdmin: string[] = ["/data-source", "/reporting"];
 
 export async function middleware(request: NextRequest) {
+  // Apply i18nRouter middleware
+  const i18nResponse = i18nRouter(request, i18nConfig);
+  if (i18nResponse) {
+    return i18nResponse;
+  }
+
   const res = NextResponse.next();
   const pathname = request.nextUrl.pathname;
 
@@ -47,5 +55,6 @@ export const config = {
     "/api/chat:path*",
     "/api/images:path*",
     "/chat/:path*",
+    '/((?!api|static|.*\\..*|_next).*)'
   ],
 };

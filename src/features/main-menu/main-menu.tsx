@@ -17,15 +17,17 @@ import {
 import { getCurrentUser } from "../auth-page/helpers";
 import { MenuLink } from "./menu-link";
 import { UserProfile } from "./user-profile";
+import initTranslations from '@/app/i18n';
 
-export const MainMenu = async () => {
+export const MainMenu = async ({locale}: { locale: 'de' | 'en' }) => {
+  const { t } = await initTranslations(locale, ['mainMenu']);
   const user = await getCurrentUser();
 
   return (
     <Menu>
       <MenuBar>
         <MenuItemContainer>
-          <MenuItem tooltip="Home" asChild>
+          <MenuItem tooltip={t('homePage')} asChild>
             <MenuLink href="/chat" ariaLabel="Go to the Home page">
               <Home {...menuIconProps} />
             </MenuLink>

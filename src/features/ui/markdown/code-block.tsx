@@ -3,6 +3,7 @@ import { FC, memo, useEffect, useState } from "react";
 import { Prism } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Button } from "../button";
+import { useTranslation } from 'react-i18next';
 
 export const fence = {
   render: "CodeBlock",
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export const CodeBlock: FC<Props> = memo(({ language, children }) => {
+  const { t } = useTranslation();
   const [isIconChecked, setIsIconChecked] = useState(false);
 
   const handleButtonClick = () => {
@@ -43,7 +45,7 @@ export const CodeBlock: FC<Props> = memo(({ language, children }) => {
         <Button
           variant={"ghost"}
           size={"sm"}
-          title="Text kopieren"
+          title={t('chat:copyText')}
           className="justify-right flex gap-2"
           onClick={handleButtonClick}
         >

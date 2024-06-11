@@ -17,8 +17,10 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: 'de' | 'en' };
 }) {
   const chatHistoryResponse = await FindAllChatThreadForCurrentUser();
 
@@ -32,7 +34,7 @@ export default async function RootLayout({
         <MenuTray>
           <ChatMenuHeader />
           <ScrollArea>
-            <ChatMenu menuItems={chatHistoryResponse.response} />
+            <ChatMenu menuItems={chatHistoryResponse.response} locale={locale} />
           </ScrollArea>
         </MenuTray>
         {children}

@@ -18,6 +18,7 @@ import {
   DeleteChatThreadByID,
   UpdateChatThreadTitle,
 } from "./chat-menu-service";
+import { useTranslation } from 'react-i18next';
 
 interface ChatMenuItemProps {
   href: string;
@@ -26,6 +27,7 @@ interface ChatMenuItemProps {
 }
 
 export const ChatMenuItem: FC<ChatMenuItemProps> = (props) => {
+  const { t } = useTranslation();
   const path = usePathname();
   const { isLoading, handleAction } = useDropdownAction({
     chatThread: props.chatThread,
@@ -58,21 +60,21 @@ export const ChatMenuItem: FC<ChatMenuItemProps> = (props) => {
           >
             <BookmarkCheck size={18} />
             <span>
-              {props.chatThread.bookmarked ? "Aus Favoriten entfernen" : "Als Favorit setzen"}
+              {props.chatThread.bookmarked ? t('chat:removeFavourite') : t('chat:addFavourite')}
             </span>
           </DropdownMenuItemWithIcon>
           <DropdownMenuItemWithIcon
             onClick={async () => await handleAction("rename")}
           >
             <Pencil size={18} />
-            <span>Umbenennen</span>
+            <span>{t('chat:rename')}</span>
           </DropdownMenuItemWithIcon>
           <DropdownMenuSeparator />
           <DropdownMenuItemWithIcon
             onClick={async () => await handleAction("delete")}
           >
             <Trash size={18} />
-            <span>Löschen</span>
+            <span>{t('chat:remove')}</span>
           </DropdownMenuItemWithIcon>
         </DropdownMenuContent>
       </DropdownMenu>

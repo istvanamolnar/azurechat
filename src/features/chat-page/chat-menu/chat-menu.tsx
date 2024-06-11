@@ -1,5 +1,4 @@
 import { sortByTimestamp } from "@/features/common/util";
-import { FC } from "react";
 import {
   ChatThreadModel,
   MenuItemsGroup,
@@ -7,13 +6,17 @@ import {
 } from "../chat-services/models";
 import { ChatGroup } from "./chat-group";
 import { ChatMenuItem } from "./chat-menu-item";
+import { TFunction } from 'i18next';
+import initTranslations from '@/app/i18n';
 
 interface ChatMenuProps {
+  locale: 'de' | 'en';
   menuItems: Array<ChatThreadModel>;
 }
 
-export const ChatMenu: FC<ChatMenuProps> = (props) => {
-  const menuItemsGrouped = GroupChatThreadByType(props.menuItems);
+export async function ChatMenu(props: ChatMenuProps) {
+  const { t } = await initTranslations(props.locale, ['chat']);
+  const menuItemsGrouped = GroupChatThreadByType(props.menuItems, t);
   return (
     <div className="px-3 flex flex-col gap-8 overflow-hidden">
       {Object.entries(menuItemsGrouped).map(
@@ -35,7 +38,7 @@ export const ChatMenu: FC<ChatMenuProps> = (props) => {
   );
 };
 
-export const GroupChatThreadByType = (menuItems: Array<ChatThreadModel>) => {
+export const GroupChatThreadByType = (menuItems: Array<ChatThreadModel>, t: TFunction<"translation", undefined>) => {
   const groupedMenuItems: Array<MenuItemsGroup> = [];
 
   // todays date
@@ -44,21 +47,25 @@ export const GroupChatThreadByType = (menuItems: Array<ChatThreadModel>) => {
   const sevenDaysAgo = new Date(today);
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
+  const favoritesLabel = t("favourites");
+  const pastSevenDaysLabel = t("pastSevenDays");
+  const previousLabel = t("previous");
+
   menuItems.sort(sortByTimestamp).forEach((el) => {
     if (el.bookmarked) {
       groupedMenuItems.push({
         ...el,
-        groupName: "Favoriten",
+        groupName: favoritesLabel,
       });
     } else if (new Date(el.lastMessageAt) > sevenDaysAgo) {
       groupedMenuItems.push({
         ...el,
-        groupName: "Letzte 7 Tage",
+        groupName: pastSevenDaysLabel,
       });
     } else {
       groupedMenuItems.push({
         ...el,
-        groupName: "Vorherige",
+        groupName: previousLabel,
       });
     }
   });
@@ -72,9 +79,9 @@ export const GroupChatThreadByType = (menuItems: Array<ChatThreadModel>) => {
   }, {} as Record<MenuItemsGroupName, Array<MenuItemsGroup>>);
 
   const records: Record<MenuItemsGroupName, Array<MenuItemsGroup>> = {
-    Favoriten: menuItemsGrouped["Favoriten"]?.sort(sortByTimestamp),
-    "Letzte 7 Tage": menuItemsGrouped["Letzte 7 Tage"]?.sort(sortByTimestamp),
-    Vorherige: menuItemsGrouped["Vorherige"]?.sort(sortByTimestamp),
+    [favoritesLabel]: menuItemsGrouped[favoritesLabel]?.sort(sortByTimestamp),
+    [pastSevenDaysLabel]: menuItemsGrouped[pastSevenDaysLabel]?.sort(sortByTimestamp),
+    [previousLabel]: menuItemsGrouped[previousLabel]?.sort(sortByTimestamp),
   };
 
   return records;

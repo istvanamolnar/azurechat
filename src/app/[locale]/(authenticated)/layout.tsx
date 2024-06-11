@@ -12,13 +12,15 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: 'de' | 'en' };
 }) {
   return (
     <AuthenticatedProviders>
       <div className={cn("flex flex-1 items-stretch")}>
-        <MainMenu />
+        <MainMenu {...{locale}}/>
         <div className="flex-1 flex">{children}</div>
       </div>
     </AuthenticatedProviders>
