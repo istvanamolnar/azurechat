@@ -19,7 +19,7 @@ import { ImageInput } from "@/features/ui/chat/chat-input-area/image-input";
 import { Microphone } from "@/features/ui/chat/chat-input-area/microphone";
 import { StopChat } from "@/features/ui/chat/chat-input-area/stop-chat";
 import { SubmitChat } from "@/features/ui/chat/chat-input-area/submit-chat";
-import React, { FC, useRef } from "react";
+import React, { useRef } from "react";
 import { chatStore, useChat } from "../chat-store";
 import { fileStore, useFileStore } from "./file/file-store";
 import { PromptSlider } from "./prompt/prompt-slider";
@@ -31,19 +31,8 @@ import {
   textToSpeechStore,
   useTextToSpeech,
 } from "./speech/use-text-to-speech";
-// import { DocumentDetail } from "../chat-header/document-detail";
-import { ChatDocumentModel, ChatThreadModel } from "../chat-services/models";
-import { ExtensionModel } from "@/features/extensions-page/extension-services/models";
-import { ExtensionDetail } from "../chat-header/extension-detail";
-import { PersonaDetail } from "../chat-header/persona-detail";
 
-interface ChatInputProps {
-  chatThread?: ChatThreadModel;
-  chatDocuments: Array<ChatDocumentModel>;
-  extensions: Array<ExtensionModel>;
-}
-
-export const ChatInput: FC<ChatInputProps> = (props) => {
+export const ChatInput = () => {
   const { loading, input, chatThreadId } = useChat();
   const { uploadButtonLabel } = useFileStore();
   const { isPlaying } = useTextToSpeech();
@@ -64,8 +53,7 @@ export const ChatInput: FC<ChatInputProps> = (props) => {
       ref={formRef}
       onSubmit={(e) => {
         e.preventDefault();
-        const isNew = !props.chatThread?.id;
-        chatStore.submitChat(e, isNew);
+        chatStore.submitChat(e);
       }}
       status={uploadButtonLabel}
     >
@@ -94,15 +82,7 @@ export const ChatInput: FC<ChatInputProps> = (props) => {
               fileStore.onFileChange({ formData, chatThreadId })
             }
           />
-          {/* <DocumentDetail chatDocuments={props.chatDocuments} /> */}
           <PromptSlider />
-          <PersonaDetail chatThread={props.chatThread} />
-          <ExtensionDetail
-            disabled={props.chatDocuments.length !== 0}
-            extensions={props.extensions}
-            installedExtensionIds={[]}
-            chatThreadId={props.chatThread?.id}
-          />
         </ChatInputSecondaryActionArea>
         <ChatInputPrimaryActionArea>
           <ImageInput />

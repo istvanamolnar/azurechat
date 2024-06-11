@@ -10,7 +10,7 @@ const ChatMessageContainer: ForwardRefRenderFunction<
   ChatMessageContainerProps
 > = (props, ref) => {
   return (
-    <ScrollArea ref={ref} className="flex-1 h-full relative" type="always">
+    <ScrollArea ref={ref} className="flex-1 h-full" type="always">
       {props.children}
     </ScrollArea>
   );

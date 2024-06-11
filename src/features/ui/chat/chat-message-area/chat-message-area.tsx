@@ -3,7 +3,7 @@ import { cn } from "@/ui/lib";
 import {
   CheckIcon,
   ClipboardIcon,
-  PocketKnife,
+  Blocks,
   UserCircle,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -56,7 +56,7 @@ export const ChatMessageArea = (props: {
     case "tool":
     case "function":
       profile = (
-        <PocketKnife
+        <Blocks
           size={28}
           strokeWidth={1.4}
           className="text-muted-foreground"
@@ -88,7 +88,7 @@ export const ChatMessageArea = (props: {
             <Button
               variant={"ghost"}
               size={"sm"}
-              title="Text kopieren"
+              title="Copy text"
               className="justify-right flex"
               onClick={handleButtonClick}
             >

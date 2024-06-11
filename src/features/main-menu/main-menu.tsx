@@ -10,9 +10,9 @@ import {
   Book,
   Home,
   MessageCircle,
-  PocketKnife,
-  Sheet,
-  VenetianMask,
+  Blocks,
+  HardDrive,
+  UserRoundCog,
 } from "lucide-react";
 import { getCurrentUser } from "../auth-page/helpers";
 import { MenuLink } from "./menu-link";
@@ -24,7 +24,7 @@ export const MainMenu = async () => {
   return (
     <Menu>
       <MenuBar>
-        {/* <MenuItemContainer>
+        <MenuItemContainer>
           <MenuItem tooltip="Home" asChild>
             <MenuLink href="/chat" ariaLabel="Go to the Home page">
               <Home {...menuIconProps} />
@@ -40,29 +40,34 @@ export const MainMenu = async () => {
           </MenuItem>
           <MenuItem tooltip="Persona">
             <MenuLink href="/persona" ariaLabel="Go to the Persona configuration page">
-              <VenetianMask {...menuIconProps} />
+              <UserRoundCog {...menuIconProps} />
             </MenuLink>
           </MenuItem>
-          <MenuItem tooltip="extensions">
+          <MenuItem tooltip="Extensions">
             <MenuLink href="/extensions" ariaLabel="Go to the Extensions configuration page">
-              <PocketKnife {...menuIconProps} />
+              <Blocks {...menuIconProps} />
             </MenuLink>
           </MenuItem>
-          <MenuItem tooltip="prompts">
+          <MenuItem tooltip="Prompts">
             <MenuLink href="/prompt" ariaLabel="Go to the Prompt Library configuration page">
               <Book {...menuIconProps} />
             </MenuLink>
           </MenuItem>
           {user.isAdmin && (
             <>
-              <MenuItem tooltip="reporting">
-                <MenuLink href="/reporting" ariaLabel="Go to the Admin reporting" >
-                  <Sheet {...menuIconProps} />
+              <MenuItem tooltip="Data source">
+                <MenuLink href="/data-source" ariaLabel="Go to the Data-source" >
+                  <HardDrive {...menuIconProps} />
                 </MenuLink>
               </MenuItem>
+              {/* <MenuItem tooltip="reporting">
+                <MenuLink href="/reporting" ariaLabel="Go to the Admin reporting" >
+                  <HardDrive {...menuIconProps} />
+                </MenuLink>
+              </MenuItem> */}
             </>
           )}
-        </MenuItemContainer> */}
+        </MenuItemContainer>
         <MenuItemContainer>
           <MenuItem tooltip="Profile">
             <UserProfile />

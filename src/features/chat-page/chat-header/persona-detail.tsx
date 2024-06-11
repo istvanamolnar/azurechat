@@ -9,22 +9,22 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/features/ui/sheet";
-import { VenetianMask } from "lucide-react";
+import { UserRoundCog } from "lucide-react";
 import { FC } from "react";
 import { ChatThreadModel } from "../chat-services/models";
 
 interface Props {
-  chatThread?: ChatThreadModel;
+  chatThread: ChatThreadModel;
 }
 
 export const PersonaDetail: FC<Props> = (props) => {
-  const persona = props.chatThread?.personaMessageTitle;
-  const personaMessage = props.chatThread?.personaMessage;
+  const persona = props.chatThread.personaMessageTitle;
+  const personaMessage = props.chatThread.personaMessage;
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant={"ghost"} size={"icon"} aria-label="Current Chat Persona Menu">
-          <VenetianMask size={16} />
+        <Button variant={"outline"} size={"icon"} aria-label="Current Chat Persona Menu">
+          <UserRoundCog size={16} />
         </Button>
       </SheetTrigger>
       <SheetContent className="min-w-[480px] sm:w-[540px] flex flex-col">

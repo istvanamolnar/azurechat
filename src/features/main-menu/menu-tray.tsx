@@ -13,8 +13,8 @@ export const MenuTray = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex flex-col border-r overflow-hidden transition-all duration-700 w-96",
-        isMenuOpen ? "translate-x-0" : "-translate-x-1/2 -ml-96",
+        "flex flex-col border-r overflow-hidden transition-all duration-700 w-96 bg-primary-foreground",
+        isMenuOpen ? "translate-x-0" : "-translate-x-full -ml-96",
         className
       )}
       {...props}

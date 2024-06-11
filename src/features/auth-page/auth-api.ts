@@ -20,7 +20,7 @@ const configureIdentityProvider = () => {
   //       async profile(profile) {
   //         const newProfile = {
   //           ...profile,
-  //           isAdmin: adminEmails?.includes(profile.email.toLowerCase()),
+  //           isAdmin: profile.email && adminEmails?.includes(profile.email.toLowerCase()),
   //         };
   //         return newProfile;
   //       },
@@ -39,13 +39,14 @@ const configureIdentityProvider = () => {
         clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
         tenantId: process.env.AZURE_AD_TENANT_ID!,
         async profile(profile) {
+          const email = profile.email?.toLowerCase() || profile.preferred_username.toLowerCase();
+          const isAdmin = !!email && adminEmails?.includes(email);
           const newProfile = {
             ...profile,
+            email,
             // throws error without this - unsure of the root cause (https://stackoverflow.com/questions/76244244/profile-id-is-missing-in-google-oauth-profile-response-nextauth)
             id: profile.sub,
-            isAdmin:
-              adminEmails?.includes(profile.email.toLowerCase()) ||
-              adminEmails?.includes(profile.preferred_username.toLowerCase()),
+            isAdmin
           };
           return newProfile;
         },

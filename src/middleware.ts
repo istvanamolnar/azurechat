@@ -2,7 +2,6 @@ import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 const requireAuth: string[] = [
-  "/home",
   "/chat",
   "/api",
   "/reporting",
@@ -10,7 +9,7 @@ const requireAuth: string[] = [
   "/persona",
   "/prompt"
 ];
-const requireAdmin: string[] = ["/reporting"];
+const requireAdmin: string[] = ["/data-source", "/reporting"];
 
 export async function middleware(request: NextRequest) {
   const res = NextResponse.next();
@@ -44,6 +43,7 @@ export const config = {
   matcher: [
     "/unauthorized/:path*",
     "/reporting/:path*",
+    "/data-source/:path*",
     "/api/chat:path*",
     "/api/images:path*",
     "/chat/:path*",

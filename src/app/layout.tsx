@@ -13,7 +13,7 @@ export const metadata = {
   openGraph: {
     title: `Aithoria - Grow your Business with Hybrid Intelligence - KI`,
     description: 'Starte deine digitale Zukunft mit Hybrid Intelligence – optimale KI-Lösungen für dein Unternehmen. → Hier gehts zur Microsoft KI-Roadmap',
-    images: [{url: `https://aithoria-chat-webapp-b7pnnclqtryz4.azurewebsites.net/LogoMitSlogan.png`, width: 2048, height: 532}],
+    images: [{url: `/LogoMitSlogan.png`, width: 2048, height: 532}],
     siteName: `Aithoria - Azure Chat`,
   }
 };

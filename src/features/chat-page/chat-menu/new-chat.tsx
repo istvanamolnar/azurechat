@@ -1,9 +1,8 @@
 "use client";
 
-import { NEW_CHAT_NAME } from "@/features/theme/theme-config";
 import { Button } from "@/features/ui/button";
 import { LoadingIndicator } from "@/features/ui/loading";
-import { Plus } from "lucide-react";
+import { SquarePen } from "lucide-react";
 import { useFormStatus } from "react-dom";
 
 export const NewChat = () => {
@@ -13,11 +12,10 @@ export const NewChat = () => {
     <Button
       aria-disabled={pending}
       size={"default"}
-      className="flex gap-2 w-full"
+      className="flex gap-2"
       variant={"outline"}
     >
-      {pending ? <LoadingIndicator isLoading={pending} /> : <Plus size={18} />}
-      {NEW_CHAT_NAME}
+      {pending ? <LoadingIndicator isLoading={pending} /> : <SquarePen size={20} />}
     </Button>
   );
 };

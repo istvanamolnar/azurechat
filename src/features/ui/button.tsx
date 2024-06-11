@@ -34,7 +34,7 @@ const buttonVariants = cva(
 
 const ButtonLinkVariant = cn(
   buttonVariants({ variant: "ghost" }),
-  "p-0 w-full h-12 flex items-center justify-center "
+  "p-0 w-full h-12 w-12 flex items-center justify-center "
 );
 
 export interface ButtonProps

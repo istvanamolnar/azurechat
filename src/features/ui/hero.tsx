@@ -33,11 +33,11 @@ export const HeroButton: FC<HeroButtonProps> = (props) => {
   return (
     <Button
       variant={"outline"}
-      className="flex flex-col gap-4 h-auto p-4 items-start text-start justify-start"
+      className="flex flex-col gap-4 h-auto p-4 items-start text-start justify-start bg-card"
       onClick={props.onClick}
     >
-      <span className="flex gap-2 items-center text-primary">
-        <span>{props.icon}</span>
+      <span className="flex gap-2 items-center">
+        <span className="text-primary">{props.icon}</span>
         <span className="">{props.title}</span>
       </span>
 

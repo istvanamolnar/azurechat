@@ -7,8 +7,6 @@ import { cn } from "@/ui/lib";
 import { AI_NAME } from "@/features/theme/theme-config";
 import { DisplayError } from "@/features/ui/error/display-error";
 import { ScrollArea } from "@/features/ui/scroll-area";
-import { MainMenu } from "@/features/main-menu/main-menu";
-import { MenuTrayToggle } from "@/features/main-menu/menu-tray-toggle";
 
 export const dynamic = "force-dynamic";
 
@@ -29,18 +27,16 @@ export default async function RootLayout({
   }
 
   return (
-    <div className="flex flex-1 grow">
-      <div className={cn("flex flex-col relative")}>
-        <MenuTray className={cn("flex flex-col grow")}>
+    <div className={cn("flex flex-1 items-stretch")}>
+      <div className="flex-1 flex">
+        <MenuTray>
           <ChatMenuHeader />
           <ScrollArea>
             <ChatMenu menuItems={chatHistoryResponse.response} />
           </ScrollArea>
-          <MainMenu />
         </MenuTray>
-        <MenuTrayToggle />
+        {children}
       </div>
-      {children}
     </div>
   );
 }
