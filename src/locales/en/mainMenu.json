@@ -1,0 +1,8 @@
+{
+  "homePage": "Home",
+  "themes": {
+    "light": "Light theme",
+    "dark": "Dark theme",
+    "system": "System theme"
+  }
+}

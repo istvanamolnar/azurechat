@@ -1,0 +1,8 @@
+{
+  "homePage": "Startseite",
+  "themes": {
+    "light": "Helles Thema",
+    "dark": "Dunkles Thema",
+    "system": "Systemmodus"
+  }
+}
