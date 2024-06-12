@@ -26,10 +26,12 @@ import {
 import { AddFunction } from "./add-function";
 import { EndpointHeader } from "./endpoint-header";
 import { ErrorMessages } from "./error-messages";
+import { useTranslation } from 'react-i18next';
 
 interface Props {}
 
 export const AddExtension: FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { isOpened, extension } = useExtensionState();
 
   const { data } = useSession();
@@ -107,7 +109,7 @@ export const AddExtension: FC<Props> = (props) => {
           </ScrollArea>
           <SheetFooter className="py-2 flex sm:justify-between flex-row">
             <PublicSwitch />
-            <Submit />
+            <Submit buttonText={t('common:save')}/>
           </SheetFooter>
         </form>
       </SheetContent>
@@ -115,12 +117,12 @@ export const AddExtension: FC<Props> = (props) => {
   );
 };
 
-function Submit() {
+function Submit({ buttonText }: { buttonText: string}) {
   const { isLoading } = useExtensionState();
   return (
     <Button disabled={isLoading} className="gap-2">
       <LoadingIndicator isLoading={isLoading} />
-      Save
+      <span>{buttonText}</span>
     </Button>
   );
 }

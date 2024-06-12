@@ -12,23 +12,23 @@ import {
   CreateChatDocument,
 } from "../../chat-services/chat-document-service";
 import { chatStore } from "../../chat-store";
+import { TFunction } from 'i18next';
 
 class FileStore {
   public uploadButtonLabel: string = "";
 
-  public async onFileChange(props: {
+  public async onFileChange({ formData, chatThreadId, t }: {
     formData: FormData;
     chatThreadId: string;
+    t: TFunction<"translation", undefined>
   }) {
-    const { formData, chatThreadId } = props;
-
     try {
       chatStore.updateLoading("file upload");
 
       formData.append("id", chatThreadId);
       const file: File | null = formData.get("file") as unknown as File;
 
-      this.uploadButtonLabel = "Processing document";
+      this.uploadButtonLabel = t('chat:processingDocument');
       const crackingResponse = await CrackDocument(formData);
 
       if (crackingResponse.status === "OK") {
@@ -37,7 +37,7 @@ class FileStore {
         const documentIndexResponses: Array<ServerActionResponse<boolean>> = [];
 
         for (const doc of crackingResponse.response) {
-          this.uploadButtonLabel = `Indexing document [${index + 1}]/[${
+          this.uploadButtonLabel = `${t('chat:indexingDocument')} [${index + 1}]/[${
             crackingResponse.response.length
           }]`;
 
@@ -58,14 +58,14 @@ class FileStore {
 
         if (allDocumentsIndexed) {
           // Update state
-          this.uploadButtonLabel = file.name + " loaded";
+          this.uploadButtonLabel = file.name + t('chat:loaded');
           // Update history DB with doc on chat thread
           const response = await CreateChatDocument(file.name, chatThreadId);
 
           if (response.status === "OK") {
             showSuccess({
-              title: "File upload",
-              description: `${file.name} uploaded successfully.`,
+              title: "File Upload",
+              description: `${file.name} ${t('chat:uploadedSuccessfully')}`,
             });
           } else {
             showError(response.errors.map((e) => e).join("\n"));
@@ -80,7 +80,7 @@ class FileStore {
           });
 
           showError(
-            "Looks like not all documents were indexed" +
+            t('chat:notAllDocsIndexedError') +
               errors.map((e) => e).join("\n")
           );
         }

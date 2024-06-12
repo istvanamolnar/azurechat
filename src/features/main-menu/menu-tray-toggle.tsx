@@ -1,16 +1,18 @@
 "use client";
+import { useTranslation } from 'react-i18next';
 import { cn } from "@/ui/lib";
 import { MenuItem, menuIconProps } from "@/ui/menu";
 import { PanelLeftClose } from "lucide-react";
 import { menuStore, useMenuState } from "./menu-store";
 
 export const MenuTrayToggle = () => {
+  const { t } = useTranslation();
   const { isMenuOpen } = useMenuState();
 
   return (
     <MenuItem
       onClick={() => menuStore.toggleMenu()}
-      tooltip="Open and Collapse menu"
+      tooltip={isMenuOpen ? t('mainMenu:closeMenu') : t('mainMenu:openMenu')}
     >
       <PanelLeftClose
         {...menuIconProps}

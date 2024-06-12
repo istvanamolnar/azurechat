@@ -13,8 +13,10 @@ import { CircleUserRound, LogOut } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { ThemeToggle } from "./theme-toggle";
+import { useTranslation } from 'react-i18next';
 
 export const UserProfile = () => {
+  const { t } = useTranslation();
   const { data: session } = useSession();
 
   return (
@@ -48,7 +50,7 @@ export const UserProfile = () => {
         <DropdownMenuSeparator />
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-medium leading-none">Switch themes</p>
+            <p className="text-sm font-medium leading-none">{t('chat:themesLabel')}</p>
             <ThemeToggle />
           </div>
         </DropdownMenuLabel>
@@ -58,7 +60,7 @@ export const UserProfile = () => {
           onClick={() => signOut({ callbackUrl: "/" })}
         >
           <LogOut {...menuIconProps} size={18} />
-          <span>Log out</span>
+          <span>{t('chat:signOut')}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

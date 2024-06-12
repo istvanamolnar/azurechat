@@ -2,83 +2,53 @@
 import { Hero, HeroButton } from "@/features/ui/hero";
 import { Atom, Languages, UserRoundCog } from "lucide-react";
 import { personaStore } from "../persona-store";
+import { useTranslation } from 'react-i18next';
 
 export const PersonaHero = () => {
+  const { t } = useTranslation();
   return (
     <Hero
       title={
         <>
-          <UserRoundCog size={36} strokeWidth={1.5} /> Persona
+          <UserRoundCog size={36} strokeWidth={1.5} />
+          <span>{t('common:persona')}</span>
         </>
       }
-      description={`  Persona is a representation of a personality that you can use to
-    have a conversation with.`}
+      description={t('persona:generalDescription')}
     >
       <HeroButton
-        title="New Persona"
-        description="Create a new personality that you can use to have a conversation with."
+        title={t('persona:newPersonaTitle')}
+        description={t('persona:newPersonaDescription')}
         icon={<UserRoundCog />}
         onClick={() =>
           personaStore.newPersonaAndOpen({
             name: "",
-            personaMessage: `Personality:
-[Describe the personality e.g. the tone of voice, the way they speak, the way they act, etc.]
-
-Expertise:
-[Describe the expertise of the personality e.g. Customer service, Marketing copywriter, etc.]
-
-Example:
-[Describe an example of the personality e.g. a Marketing copywriter who can write catchy headlines.]`,
+            personaMessage: t('persona:newPersonaSystemMessage'),
             description: "",
           })
         }
       />
       <HeroButton
-        title="Translator"
-        description="English to French translator."
+        title={t('persona:newTranslatorTitle')}
+        description={t('persona:newTranslatorDescription')}
         icon={<Languages />}
         onClick={() =>
           personaStore.newPersonaAndOpen({
-            name: "English to French translator",
-            personaMessage:
-              "You are an expert in translating English to French. You will be provided with a sentence in English, and your task is to translate it into French.",
-            description: "English to French translator.",
+            name: t('persona:newTranslatorTitle'),
+            personaMessage: t('persona:newTranslatorSystemMessage'),
+            description: t('persona:newTranslatorDescription'),
           })
         }
       />
       <HeroButton
-        title="ReactJS Expert"
-        description="ReactJs expert who can write clean functional components."
+        title={t('persona:newReactExpertTitle')}
+        description={t('persona:newReactExpertDescription')}
         icon={<Atom />}
         onClick={() =>
           personaStore.newPersonaAndOpen({
-            name: "ReactJS Expert",
-            personaMessage: `You are a ReactJS expert who can write clean functional components. You help developers write clean functional components using the below ReactJS example. 
-              \nExample:
-import * as React from "react";
-
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
-
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <input
-        className={
-          "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-        }
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Input.displayName = "Input";
-
-export { Input };
-
-              `,
-            description: "Customer service persona.",
+            name: t('persona:newReactExpertTitle'),
+            personaMessage: t('persona:newReactExpertSystemMessage'),
+            description: t('persona:newReactExpertDescription'),
           })
         }
       />

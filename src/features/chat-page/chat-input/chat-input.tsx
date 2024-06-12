@@ -31,8 +31,10 @@ import {
   textToSpeechStore,
   useTextToSpeech,
 } from "./speech/use-text-to-speech";
+import { useTranslation } from 'react-i18next';
 
 export const ChatInput = () => {
+  const { t } = useTranslation();
   const { loading, input, chatThreadId } = useChat();
   const { uploadButtonLabel } = useFileStore();
   const { isPlaying } = useTextToSpeech();
@@ -79,7 +81,7 @@ export const ChatInput = () => {
         <ChatInputSecondaryActionArea>
           <AttachFile
             onClick={(formData) =>
-              fileStore.onFileChange({ formData, chatThreadId })
+              fileStore.onFileChange({ formData, chatThreadId, t })
             }
           />
           <PromptSlider />

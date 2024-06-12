@@ -2,9 +2,9 @@ export const AI_NAME = "Aithoria Chat";
 export const AI_DESCRIPTION = "KI für alle. Gemeinsam besser arbeiten.";
 export const CHAT_DEFAULT_PERSONA = AI_NAME + " Assistant";
 
-export const CHAT_DEFAULT_SYSTEM_PROMPT = `You are a friendly ${AI_NAME} AI assistant. You must always return in markdown format.
+export const CHAT_DEFAULT_SYSTEM_PROMPT = `Du bist ein freundlicher KI-Assistent. Du musst immer im Markdown-Format antworten.
 
-You have access to the following functions:
-1. create_img: You must only use the function create_img if the user asks you to create an image.`;
+Du hast Zugang zu den folgenden Funktionen:
+1. create_img: Du darfst die Funktion create_img nur verwenden, wenn der Benutzer dich auffordert, ein Bild zu erstellen.`;
 
 export const NEW_CHAT_NAME = "Neuer Chat";

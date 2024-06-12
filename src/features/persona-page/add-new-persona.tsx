@@ -23,10 +23,12 @@ import {
   personaStore,
   usePersonaState,
 } from "./persona-store";
+import { useTranslation } from 'react-i18next';
 
 interface Props {}
 
 export const AddNewPersona: FC<Props> = (props) => {
+  const { t } = useTranslation();
   const initialState: ServerActionResponse | undefined = undefined;
 
   const { isOpened, persona } = usePersonaState();
@@ -45,7 +47,7 @@ export const AddNewPersona: FC<Props> = (props) => {
       return (
         <div className="flex items-center space-x-2">
           <Switch name="isPublished" defaultChecked={persona.isPublished} />
-          <Label htmlFor="description">Publish</Label>
+          <Label htmlFor="description">{t('common:publish')}</Label>
         </div>
       );
     }
@@ -60,7 +62,7 @@ export const AddNewPersona: FC<Props> = (props) => {
     >
       <SheetContent className="min-w-[480px] sm:w-[540px] flex flex-col">
         <SheetHeader>
-          <SheetTitle>Persona</SheetTitle>
+          <SheetTitle>{t('common:persona')}</SheetTitle>
         </SheetHeader>
         <form action={formAction} className="flex-1 flex flex-col">
           <ScrollArea
@@ -80,39 +82,39 @@ export const AddNewPersona: FC<Props> = (props) => {
                 </>
               )}
               <div className="grid gap-2">
-                <Label>Name</Label>
+                <Label>{t('persona:nameLabel')}</Label>
                 <Input
                   type="text"
                   required
                   name="name"
                   defaultValue={persona.name}
-                  placeholder="Name of your persona"
+                  placeholder={t('persona:namePlaceholder')}
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="description">Short description</Label>
+                <Label htmlFor="description">{t('persona:shortDescriptionLabel')}</Label>
                 <Input
                   type="text"
                   required
                   defaultValue={persona.description}
                   name="description"
-                  placeholder="Short description"
+                  placeholder={t('persona:shortDescriptionPlaceholder')}
                 />
               </div>
               <div className="grid gap-2 flex-1 ">
-                <Label htmlFor="personaMessage">Personality</Label>
+                <Label htmlFor="personaMessage">{t('persona:systemMessageLabel')}</Label>
                 <Textarea
                   className="min-h-[300px]"
                   required
                   defaultValue={persona.personaMessage}
                   name="personaMessage"
-                  placeholder="Personality of your persona"
+                  placeholder={t('persona:systemMessagePlaceholder')}
                 />
               </div>
             </div>
           </ScrollArea>
           <SheetFooter className="py-2 flex sm:justify-between flex-row">
-            <PublicSwitch /> <Submit />
+            <PublicSwitch /> <Submit buttonLabel={t('common:save')}/>
           </SheetFooter>
         </form>
       </SheetContent>
@@ -120,12 +122,12 @@ export const AddNewPersona: FC<Props> = (props) => {
   );
 };
 
-function Submit() {
+function Submit(props: {buttonLabel: string}) {
   const status = useFormStatus();
   return (
     <Button disabled={status.pending} className="gap-2">
       <LoadingIndicator isLoading={status.pending} />
-      Save
+      {props.buttonLabel}
     </Button>
   );
 }

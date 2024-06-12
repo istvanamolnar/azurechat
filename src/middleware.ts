@@ -16,7 +16,7 @@ const requireAdmin: string[] = ["/data-source", "/reporting"];
 export async function middleware(request: NextRequest) {
   const res = NextResponse.next();
   const pathname = request.nextUrl.pathname;
-  console.log(pathname);
+
   if (requireAuth.some((path) => pathname.startsWith(path))) {
     const token = await getToken({
       req: request,

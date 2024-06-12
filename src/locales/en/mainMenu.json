@@ -1,5 +1,7 @@
 {
+  "closeMenu": "Hide menu",
   "homePage": "Home",
+  "openMenu": "Open menu",
   "themes": {
     "light": "Light theme",
     "dark": "Dark theme",

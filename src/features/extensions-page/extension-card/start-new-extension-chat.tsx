@@ -7,13 +7,14 @@ import { FC, useState } from "react";
 import { Button } from "../../ui/button";
 import { CreateChatWithExtension } from "../extension-services/extension-service";
 import { ExtensionModel } from "../extension-services/models";
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   extension: ExtensionModel;
 }
 
-export const StartNewExtensionChat: FC<Props> = (props) => {
-  const { extension } = props;
+export const StartNewExtensionChat: FC<Props> = ({ extension }) => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -32,7 +33,7 @@ export const StartNewExtensionChat: FC<Props> = (props) => {
       ) : (
         <MessageCircle size={18} />
       )}
-      Start chat
+      {t("common:startChat")}
     </Button>
   );
 };

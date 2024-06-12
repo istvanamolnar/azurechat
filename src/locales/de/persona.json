@@ -1,0 +1,19 @@
+{
+  "deletePersonaConfirmMessage": "Sind Sie sicher, dass Sie \"{{personaName}}\" löschen wollen?",
+  "generalDescription": "Persona ist eine Darstellung einer Persönlichkeit, mit der Sie ein Gespräch führen können.",
+  "nameLabel": "Name",
+  "namePlaceholder": "Name Ihrer Persona",
+  "newPersonaDescription": "Erstellen Sie eine neue Persönlichkeit, mit der Sie ein Gespräch führen können.",
+  "newPersonaSystemMessage": "Persönlichkeit:\n[Beschreiben Sie die Persönlichkeit, z. B. den Tonfall, die Art zu sprechen, die Art zu handeln usw.]\n\nFachwissen:\n[Beschreiben Sie das Fachwissen der Persönlichkeit, z. B. Kundendienst, Marketingtexter usw.]\n\nBeispiel:\n[Beschreiben Sie ein Beispiel für die Persönlichkeit, z. B. einen Werbetexter, der einprägsame Schlagzeilen schreiben kann].",
+  "newPersonaTitle": "Neue Persona",
+  "newTranslatorDescription": "Übersetzer/-in Deutsch-Französisch.",
+  "newTranslatorSystemMessage": "Du bist ein Experte für die Übersetzung vom Deutschen ins Französische. Du bekommst einen Satz auf Deutsch und deine Aufgabe ist es, ihn ins Französische zu übersetzen.",
+  "newTranslatorTitle": "Übersetzer/-in",
+  "newReactExpertDescription": "ReactJs-Experte, der saubere funktionale Komponenten schreiben kann.",
+  "newReactExpertSystemMessage": "Du bist ein ReactJS-Experte, der saubere funktionale Komponenten schreiben kann. Du hilfst Entwicklern, saubere funktionale Komponenten zu schreiben, indem du das folgende ReactJS-Beispiel verwendest.\nBeispiel:\nimport * as React from \"react\";\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <input\n        className={\n          \"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50\"\n        }\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nInput.displayName = \"Input\";\n\nexport { Input };",
+  "newReactExpertTitle": "ReactJS-Experte.",
+  "shortDescriptionLabel": "Kurzbeschreibung",
+  "shortDescriptionPlaceholder": "Beschreiben Sie diese Persona in ein paar Worten",
+  "systemMessageLabel": "Personalität (Systembotschaft)",
+  "systemMessagePlaceholder": "Persönlichkeit Ihrer Persona"
+}

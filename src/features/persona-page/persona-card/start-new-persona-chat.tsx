@@ -8,13 +8,14 @@ import { FC, useState } from "react";
 import { Button } from "../../ui/button";
 import { PersonaModel } from "../persona-services/models";
 import { CreatePersonaChat } from "../persona-services/persona-service";
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   persona: PersonaModel;
 }
 
-export const StartNewPersonaChat: FC<Props> = (props) => {
-  const { persona } = props;
+export const StartNewPersonaChat: FC<Props> = ({ persona }) => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -36,7 +37,7 @@ export const StartNewPersonaChat: FC<Props> = (props) => {
       ) : (
         <MessageCircle size={18} />
       )}
-      Start chat
+      {t("common:startChat")}
     </Button>
   );
 };

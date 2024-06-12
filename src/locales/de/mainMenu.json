@@ -1,5 +1,7 @@
 {
+  "closeMenu": "Menü zuklappen",
   "homePage": "Startseite",
+  "openMenu": "Menü aufklappen",
   "themes": {
     "light": "Helles Thema",
     "dark": "Dunkles Thema",

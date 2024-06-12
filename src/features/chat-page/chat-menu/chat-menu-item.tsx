@@ -74,7 +74,7 @@ export const ChatMenuItem: FC<ChatMenuItemProps> = (props) => {
             onClick={async () => await handleAction("delete")}
           >
             <Trash size={18} />
-            <span>{t('chat:remove')}</span>
+            <span>{t('common:delete')}</span>
           </DropdownMenuItemWithIcon>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -85,6 +85,7 @@ export const ChatMenuItem: FC<ChatMenuItemProps> = (props) => {
 type DropdownAction = "bookmark" | "rename" | "delete";
 
 const useDropdownAction = (props: { chatThread: ChatThreadModel }) => {
+  const { t } = useTranslation();
   const { chatThread } = props;
   const [isLoading, setIsLoading] = useState(false);
 
@@ -95,14 +96,14 @@ const useDropdownAction = (props: { chatThread: ChatThreadModel }) => {
         await BookmarkChatThread({ chatThread });
         break;
       case "rename":
-        const name = window.prompt("Enter the new name for the chat thread:");
+        const name = window.prompt(t('chat:renameThread'));
         if (name !== null) {
           await UpdateChatThreadTitle({ chatThread, name });
         }
         break;
       case "delete":
         if (
-          window.confirm("Are you sure you want to delete this chat thread?")
+          window.confirm(t('chat:deleteThreadConfirmMessage'))
         ) {
           await DeleteChatThreadByID(chatThread.id);
         }

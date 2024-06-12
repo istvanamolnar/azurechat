@@ -12,17 +12,18 @@ import {
   SheetTrigger,
 } from "../../ui/sheet";
 import { PersonaModel } from "../persona-services/models";
+import initTranslations from '@/app/i18n';
 
 interface Props {
   persona: PersonaModel;
 }
 
-export const ViewPersona: FC<Props> = (props) => {
-  const { persona } = props;
+export const ViewPersona: FC<Props> = async ({ persona }) => {
+  const { t } = await initTranslations('de', ['persona', 'common']);
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant={"outline"} title="Show message">
+        <Button variant={"outline"} title={t('common:showDetails')}>
           <Info size={18} />
         </Button>
       </SheetTrigger>
@@ -39,12 +40,12 @@ export const ViewPersona: FC<Props> = (props) => {
                 className="min-h-[300px]"
                 defaultValue={persona.personaMessage}
                 name="personaMessage"
-                placeholder="Personality of your persona"
+                placeholder={t('persona:systemMessagePlaceholder')}
               />
               <p className="text-xs text-muted-foreground">
                 {persona.isPublished
-                  ? `This is published and everyone in your organisation can use ${persona.name} persona`
-                  : "This is only visible to you"}
+                  ? t('common:publishedMessage')
+                  : t('common:unpublishedMessage')}
               </p>
             </div>
           </div>

@@ -10,12 +10,14 @@ import {
 import { File } from "lucide-react";
 import { FC } from "react";
 import { ChatDocumentModel } from "../chat-services/models";
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   chatDocuments: Array<ChatDocumentModel>;
 }
 
 export const DocumentDetail: FC<Props> = (props) => {
+  const { t } = useTranslation();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -25,7 +27,7 @@ export const DocumentDetail: FC<Props> = (props) => {
       </SheetTrigger>
       <SheetContent className="min-w-[480px] sm:w-[540px] flex flex-col">
         <SheetHeader>
-          <SheetTitle>Documents</SheetTitle>
+          <SheetTitle>{t('chat:documents')}</SheetTitle>
         </SheetHeader>
         <ScrollArea className="flex-1 -mx-6 flex" type="always">
           <div className="pb-6 px-6 flex gap-2 flex-col  flex-1">

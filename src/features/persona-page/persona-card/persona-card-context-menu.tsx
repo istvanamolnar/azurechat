@@ -13,6 +13,8 @@ import {
 import { PersonaModel } from "../persona-services/models";
 import { DeletePersona } from "../persona-services/persona-service";
 import { personaStore } from "../persona-store";
+import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
 
 interface Props {
   persona: PersonaModel;
@@ -21,8 +23,10 @@ interface Props {
 type DropdownAction = "edit" | "delete";
 
 export const PersonaCardContextMenu: FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { isLoading, handleAction } = useDropdownAction({
     persona: props.persona,
+    t
   });
 
   return (
@@ -40,13 +44,13 @@ export const PersonaCardContextMenu: FC<Props> = (props) => {
             onClick={() => personaStore.updatePersona(props.persona)}
           >
             <Pencil size={18} />
-            <span>Edit</span>
+            <span>{t('common:edit')}</span>
           </DropdownMenuItemWithIcon>
           <DropdownMenuItemWithIcon
             onClick={async () => await handleAction("delete")}
           >
             <Trash size={18} />
-            <span>Delete</span>
+            <span>{t('common:delete')}</span>
           </DropdownMenuItemWithIcon>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -54,8 +58,11 @@ export const PersonaCardContextMenu: FC<Props> = (props) => {
   );
 };
 
-const useDropdownAction = (props: { persona: PersonaModel }) => {
-  const { persona } = props;
+const useDropdownAction = (props: {
+  persona: PersonaModel;
+  t: TFunction<"translation", undefined>
+}) => {
+  const { persona, t } = props;
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAction = async (action: DropdownAction) => {
@@ -63,7 +70,7 @@ const useDropdownAction = (props: { persona: PersonaModel }) => {
     switch (action) {
       case "delete":
         if (
-          window.confirm(`Are you sure you want to delete ${persona.name}?`)
+          window.confirm(t(`persona:deletePersonaConfirmMessage`, { personaName: persona.name }))
         ) {
           await DeletePersona(persona.id);
           RevalidateCache({

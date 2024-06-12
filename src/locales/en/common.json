@@ -1,0 +1,11 @@
+{
+  "delete": "Delete",
+  "edit": "Edit",
+  "persona": "Persona",
+  "publish": "Publish",
+  "publishedMessage": "Published and everyone in your organisation can use this",
+  "save": "Save",
+  "showDetails": "Show details",
+  "startChat": "Start Chat",
+  "unpublishedMessage": "This is only visible to you"
+}
