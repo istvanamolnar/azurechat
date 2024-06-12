@@ -1,6 +1,8 @@
 {
+  "clone": "Klonen",
   "delete": "Löschen",
   "edit": "Bearbeiten",
+  "extensions": "Extensions",
   "persona": "Persona",
   "publish": "Veröffentlichen",
   "publishedMessage": "Veröffentlicht und jeder in Ihrer Organisation kann dies nutzen",

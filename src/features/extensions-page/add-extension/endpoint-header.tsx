@@ -7,6 +7,7 @@ import { KeyRound, Plus, Trash } from "lucide-react";
 import { FC } from "react";
 import { HeaderModel } from "../extension-services/models";
 import { extensionStore, useExtensionState } from "../extension-store";
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   header: HeaderModel;
@@ -55,22 +56,24 @@ export const EndpointHeaderRow: FC<Props> = (props) => {
 };
 
 export const EndpointHeaderTitle = () => {
+  const { t } = useTranslation('extension');
   return (
     <div className="flex gap-2">
-      <Label className="text-muted-foreground flex-1">Key</Label>
-      <Label className="text-muted-foreground flex-1">Value</Label>
+      <Label className="text-muted-foreground flex-1">{t('aiSearch.headers.key')}</Label>
+      <Label className="text-muted-foreground flex-1">{t('aiSearch.headers.value')}</Label>
       <Label className="text-muted-foreground w-10"> </Label>
     </div>
   );
 };
 
 export const EndpointHeader = () => {
+  const { t } = useTranslation('extension');
   const { extension } = useExtensionState();
   const { headers } = extension;
   return (
     <div className="flex flex-col gap-4 bg-foreground/[0.02] border p-4 rounded-md ">
       <div className="flex justify-between items-center gap-2 ">
-        <SheetTitle>Headers</SheetTitle>
+        <SheetTitle>{t('aiSearch.headers.headers')}</SheetTitle>
         <Button
           type="button"
           className="flex gap-2"
@@ -82,14 +85,15 @@ export const EndpointHeader = () => {
             })
           }
         >
-          <Plus size={18} /> Add Header
+          <Plus size={18} />
+          <span>{t('aiSearch.headers.addHeaders')}</span>
         </Button>
       </div>
       <Alert className="text-xs">
         <KeyRound size={18} />
-        <AlertTitle>Secure header values</AlertTitle>
+        <AlertTitle>{t('aiSearch.headers.secureInfo.title')}</AlertTitle>
         <AlertDescription className="text-xs">
-          Header values are stored and retrieved from Azure Key Vault
+          {t('aiSearch.headers.secureInfo.description')}
         </AlertDescription>
       </Alert>
       <EndpointHeaderTitle />

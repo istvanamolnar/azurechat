@@ -15,22 +15,25 @@ import CodeMirror from "@uiw/react-codemirror";
 import { ChevronDown, ChevronUp, Copy, Plus, Trash } from "lucide-react";
 import { useTheme } from "next-themes";
 import { extensionStore, useExtensionState } from "../extension-store";
+import { useTranslation } from 'react-i18next';
 
 export const AddFunction = () => {
+  const { t } = useTranslation("extension");
   const { extension } = useExtensionState();
 
   const { theme } = useTheme();
   return (
     <div className="flex gap-4 flex-col bg-foreground/[0.02] border p-4 rounded-md text-sm">
       <div className="flex items-center justify-between">
-        <SheetTitle>Functions</SheetTitle>
+        <SheetTitle>{t('aiSearch.functions.label')}</SheetTitle>
         <Button
           type="button"
           className="flex gap-2"
           variant={"outline"}
           onClick={() => extensionStore.addFunction()}
         >
-          <Plus size={18} /> Add Function
+          <Plus size={18} />
+          <span>{t('aiSearch.functions.addFunction')}</span>
         </Button>
       </div>
       {extension.functions.map((func, index) => (
@@ -63,20 +66,22 @@ export const AddFunction = () => {
                     })
                   }
                 >
-                  <Copy size={18} /> Clone
+                  <Copy size={18} />
+                  <span>{t('common:clone')}</span>
                 </Button>
                 <Button
                   className="flex gap-2"
                   variant={"outline"}
                   onClick={() => extensionStore.removeFunction(func.id)}
                 >
-                  <Trash size={18} /> Delete
+                  <Trash size={18} />
+                  <span>{t('common:delete')}</span>
                 </Button>
               </div>
             </div>
 
             <div className="grid gap-2">
-              <Label>API endpoint</Label>
+              <Label>{t('aiSearch.functions.apiEndpoint')}</Label>
               <div className="flex gap-2">
                 <Select
                   defaultValue={func.endpointType}
@@ -98,12 +103,12 @@ export const AddFunction = () => {
                   required
                   name="endpoint[]"
                   defaultValue={func.endpoint}
-                  placeholder="Enter URL"
+                  placeholder={t('aiSearch.functions.enterUrl')}
                 />
               </div>
             </div>
 
-            <Label>GPT Function call definition (JSON)</Label>
+            <Label>{t('aiSearch.functions.definition')}</Label>
             <div className="w-[580px] max-w-[580px]">
               <input type="hidden" name="code[]" value={func.code}/>
               <CodeMirror

@@ -18,10 +18,12 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Switch } from "../ui/switch";
 import { Textarea } from "../ui/textarea";
 import { addOrUpdatePrompt, promptStore, usePromptState } from "./prompt-store";
+import { useTranslation } from 'react-i18next';
 
 interface SliderProps {}
 
 export const AddPromptSlider: FC<SliderProps> = (props) => {
+  const { t } = useTranslation("prompts");
   const initialState: ServerActionResponse | undefined = undefined;
 
   const { isOpened, prompt } = usePromptState();
@@ -37,7 +39,7 @@ export const AddPromptSlider: FC<SliderProps> = (props) => {
       return (
         <div className="flex items-center space-x-2">
           <Switch name="isPublished" defaultChecked={prompt.isPublished} />
-          <Label htmlFor="description">Publish</Label>
+          <Label htmlFor="description">{t('common:publish')}</Label>
         </div>
       );
     }
@@ -52,7 +54,7 @@ export const AddPromptSlider: FC<SliderProps> = (props) => {
     >
       <SheetContent className="min-w-[480px] sm:w-[540px] flex flex-col">
         <SheetHeader>
-          <SheetTitle>Persona</SheetTitle>
+          <SheetTitle>{t('prompt')}</SheetTitle>
         </SheetHeader>
         <form action={formAction} className="flex-1 flex flex-col">
           <ScrollArea
@@ -72,29 +74,29 @@ export const AddPromptSlider: FC<SliderProps> = (props) => {
                 </>
               )}
               <div className="grid gap-2">
-                <Label>Name</Label>
+                <Label>{t('name.label')}</Label>
                 <Input
                   type="text"
                   required
                   name="name"
                   defaultValue={prompt.name}
-                  placeholder="Name of the prompt"
+                  placeholder={t('name.placeholder')}
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="description">Short description</Label>
+                <Label htmlFor="description">{t('shortDescription.label')}</Label>
                 <Textarea
                   required
                   defaultValue={prompt.description}
                   name="description"
                   className="h-96"
-                  placeholder="eg: Write a funny joke that a 5 year old would understand"
+                  placeholder={t('shortDescription.placeholder')}
                 />
               </div>
             </div>
           </ScrollArea>
           <SheetFooter className="py-2 flex sm:justify-between flex-row">
-            <PublicSwitch /> <Submit />
+            <PublicSwitch /> <Submit buttonText={t('common:save')} />
           </SheetFooter>
         </form>
       </SheetContent>
@@ -102,12 +104,12 @@ export const AddPromptSlider: FC<SliderProps> = (props) => {
   );
 };
 
-function Submit() {
+function Submit({buttonText}: {buttonText: string}) {
   const status = useFormStatus();
   return (
     <Button disabled={status.pending} className="gap-2">
       <LoadingIndicator isLoading={status.pending} />
-      Save
+      <span>{buttonText}</span>
     </Button>
   );
 }

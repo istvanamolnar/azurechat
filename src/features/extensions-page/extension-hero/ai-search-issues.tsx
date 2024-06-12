@@ -3,15 +3,17 @@ import { HeroButton } from "@/features/ui/hero";
 import { FileSearch } from "lucide-react";
 import { ExtensionModel } from "../extension-services/models";
 import { extensionStore } from "../extension-store";
+import { useTranslation } from 'react-i18next';
 
 export const AISearch = () => {
+  const { t } = useTranslation('extension');
   const newExample = () => {
     const aiSearchExample: ExtensionModel = {
       createdAt: new Date(),
-      description: "Azure AI Search",
+      description: t('aiSearch.description'),
       id: "",
-      name: "Bring your own Azure AI Search",
-      executionSteps: `You are an expert in searching internal documents using aisearch function. You must always include a citation at the end of your answer and don't include a full stop after the citations. Use the format for your citation {% citation items=[{name:\\"filename 1\\",id:\\"file id\\"}, {name:\\"filename 2\\",id:\\"file id\\"}] /%}`,
+      name: t('aiSearch.title'),
+      executionSteps: t('aiSearch.executionSteps') + "{% citation items=[{name:\"filename 1\",id:\"file id\"}, {name:\"filename 2\",id:\"file id\"}] /%}",
       functions: [
         {
           code: `{
@@ -21,11 +23,11 @@ export const AISearch = () => {
   "properties": {
     "body": {
       "type": "object",
-      "description": "Body of search for relevant information",
+      "description": "${t('aiSearch.functions.code.body')}",
       "properties": {
         "search": {
           "type": "string",
-          "description": "The exact search value from the user"
+          "description": "${t('aiSearch.functions.code.search')}"
         }
       },
       "required": ["search"]
@@ -33,8 +35,9 @@ export const AISearch = () => {
   },
   "required": ["body"]
 },
-"description": "You must use this to search for content based on user questions."
-}`,
+"description": "${t('aiSearch.functions.code.description')}"
+}
+          `,
           endpoint: "https:AZURE_CHAT_HOST.com/api/document",
           id: uniqueId(),
           endpointType: "POST",
@@ -45,22 +48,22 @@ export const AISearch = () => {
         {
           id: uniqueId(),
           key: "vectors",
-          value: "comma,separated,values of the vectors on the index",
+          value: t('aiSearch.headers.vector'),
         },
         {
           id: uniqueId(),
           key: "apiKey",
-          value: "YOUR API KEY",
+          value: t('aiSearch.headers.apiKey'),
         },
         {
           id: uniqueId(),
           key: "searchName",
-          value: "NAME OF AI SEARCH",
+          value: t('aiSearch.headers.searchName'),
         },
         {
           id: uniqueId(),
           key: "indexName",
-          value: "NAME OF THE SEARCH INDEX",
+          value: t('aiSearch.headers.indexName'),
         },
       ],
       isPublished: false,
@@ -73,8 +76,8 @@ export const AISearch = () => {
 
   return (
     <HeroButton
-      title="Azure AI Search"
-      description="Bring your own Azure AI Search"
+      title={t('aiSearch.title')}
+      description={t('aiSearch.description')}
       icon={<FileSearch />}
       onClick={newExample}
     />

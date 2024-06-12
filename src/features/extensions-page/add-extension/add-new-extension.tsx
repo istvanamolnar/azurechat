@@ -31,7 +31,7 @@ import { useTranslation } from 'react-i18next';
 interface Props {}
 
 export const AddExtension: FC<Props> = (props) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('extension');
   const { isOpened, extension } = useExtensionState();
 
   const { data } = useSession();
@@ -49,7 +49,7 @@ export const AddExtension: FC<Props> = (props) => {
       return (
         <div className="flex items-center space-x-2">
           <Switch name="isPublished" defaultChecked={extension.isPublished} />
-          <Label htmlFor="description">Publish</Label>
+          <Label htmlFor="description">{t('common:publish')}</Label>
         </div>
       );
     }
@@ -75,32 +75,32 @@ export const AddExtension: FC<Props> = (props) => {
               <ErrorMessages />
               <input type="hidden" name="id" defaultValue={extension.id} />
               <div className="grid gap-2">
-                <Label>Name</Label>
+                <Label>{t('nameInput.label')}</Label>
                 <Input
                   type="text"
                   required
                   name="name"
                   defaultValue={extension.name}
-                  placeholder="Name of your Extension"
+                  placeholder={t('nameInput.placeholder')}
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="description">Short description</Label>
+                <Label htmlFor="description">{t('shortDescriptionInput.label')}</Label>
                 <Input
                   type="text"
                   required
                   defaultValue={extension.description}
                   name="description"
-                  placeholder="Short description"
+                  placeholder={t('shortDescriptionInput.placeholder')}
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="description">Detail description</Label>
+                <Label htmlFor="executionSteps">{t('detailsInput.label')}</Label>
                 <Textarea
                   required
                   defaultValue={extension.executionSteps}
                   name="executionSteps"
-                  placeholder="Describe specialties and the steps to execute the extension"
+                  placeholder={t('detailsInput.placeholder')}
                 />
               </div>
               <EndpointHeader />

@@ -16,13 +16,12 @@ interface Props {
   showContextMenu: boolean;
 }
 
-export const PersonaCard: FC<Props> = (props) => {
-  const { persona } = props;
+export const PersonaCard: FC<Props> = ({ persona, showContextMenu }) => {
   return (
     <Card key={persona.id} className="flex flex-col">
       <CardHeader className="flex flex-row">
         <CardTitle className="flex-1">{persona.name}</CardTitle>
-        {props.showContextMenu && (
+        {showContextMenu && (
           <div>
             <PersonaCardContextMenu persona={persona} />
           </div>
@@ -32,7 +31,7 @@ export const PersonaCard: FC<Props> = (props) => {
         {persona.description}
       </CardContent>
       <CardFooter className="gap-1 content-stretch f">
-        {props.showContextMenu && <ViewPersona persona={persona} />}
+        {showContextMenu && <ViewPersona persona={persona} />}
 
         <StartNewPersonaChat persona={persona} />
       </CardFooter>

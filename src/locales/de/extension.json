@@ -1,2 +1,62 @@
 {
+  "aiSearch": {
+    "title": "AI Dokument-Suche",
+    "description": "AI-Suche in freigegebenen Dokumenten",
+    "executionSteps": "Du bist Experte für die Suche in internen Dokumenten mithilfe der Suchfunktion. Du musst immer ein Zitat am Ende deiner Antwort einfügen und darfst keinen Punkt nach den Zitaten setzen. Verwende das Format für deine Zitate: ",
+    "functions": {
+      "addFunction": "Funktion hinzufügen",
+      "apiEndpoint": "API-Endpunkt",
+      "definition": "GPT Funktionsaufruf-Definition (JSON)",
+      "enterUrl": "Geben Sie die URL des API-Endpunkts ein",
+      "label": "Functions",
+      "code": {
+        "body": "Hauptteil der Suche nach relevanten Informationen.",
+        "description": "Du musst dies nutzen, um nach Inhalten zu suchen, die auf Nutzerfragen basieren.",
+        "search": "Der genaue Suchwert des Benutzers."
+      }
+    },
+    "headers": {
+      "addHeaders": "Headers hinzufügen",
+      "apiKey": "IHR API SCHLÜSSEL",
+      "headers": "Headers",
+      "indexName": "NAME DES SUCHINDEXES",
+      "key": "Key",
+      "searchName": "NAME DES AZURE AI-SUCHDIENSTES",
+      "secureInfo": {
+        "title": "Sichere Header-Werte",
+        "description": "Header-Werte werden im Azure Key Vault gespeichert und abgerufen"
+      },
+      "value": "Value",
+      "vector": "durch,Kommata,getrennte,Werte der Vektoren auf dem Index"
+    }
+  },
+  "bingSearch": {
+    "apiKeyPlaceholder": "DEIN API-SCHLÜSSEL HIER",
+    "codeExample": {
+      "queryDescription": "Verwende dies als Parameter für die Suchanfrage",
+      "searchQueryExampleDescription": "Suchanfrage des Benutzers",
+      "searchQueryExample": "Wie ist das aktuelle Wetter in Sydney, Australien?",
+      "systemMessage": "Nutze BingSearch für die Suche nach Informationen im Internet, um aktuelle Informationen zu finden"
+    },
+    "systemMessage": "Du bist Experte für die Suche im Internet mit der BingSearch-Funktion.",
+    "title": "Bing-Suche",
+    "description": "Mit der Bing-Suche immer auf dem neuesten Stand"
+  },
+  "detailsInput": {
+    "label": "Details",
+    "placeholder": "Beschreiben Sie Spezialitäten und die Schritte zur Durchführung der Erweiterung"
+  },
+  "generalDescription": "Nahtlose Verbindung von {{AI_NAME}} mit internen APIs oder externen Ressourcen",
+  "nameInput": {
+    "label": "Name",
+    "placeholder": "Gib einen Namen für die Extension ein"
+  },
+  "newExtension": {
+    "title": "Neue Extension",
+    "description": "Eine neue Extension erstellen"
+  },
+  "shortDescriptionInput": {
+    "Label": "Kurzbeschreibung",
+    "placeholder": "Gib eine kurze Beschreibung für die Extension ein"
+  }
 }

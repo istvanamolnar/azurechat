@@ -13,6 +13,7 @@ import { LoadingIndicator } from "../ui/loading";
 import { PromptModel } from "./models";
 import { DeletePrompt } from "./prompt-service";
 import { promptStore } from "./prompt-store";
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   prompt: PromptModel;
@@ -21,6 +22,7 @@ interface Props {
 type DropdownAction = "delete";
 
 export const PromptCardContextMenu: FC<Props> = (props) => {
+  const { t } = useTranslation("common");
   const { isLoading, handleAction } = useDropdownAction({
     prompt: props.prompt,
   });
@@ -40,13 +42,13 @@ export const PromptCardContextMenu: FC<Props> = (props) => {
             onClick={() => promptStore.updatePrompt(props.prompt)}
           >
             <Pencil size={18} />
-            <span>Edit</span>
+            <span>{t('edit')}</span>
           </DropdownMenuItemWithIcon>
           <DropdownMenuItemWithIcon
             onClick={async () => await handleAction("delete")}
           >
             <Trash size={18} />
-            <span>Delete</span>
+            <span>{t('delete')}</span>
           </DropdownMenuItemWithIcon>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -55,6 +57,7 @@ export const PromptCardContextMenu: FC<Props> = (props) => {
 };
 
 const useDropdownAction = (props: { prompt: PromptModel }) => {
+  const { t } = useTranslation("prompts");
   const { prompt } = props;
   const [isLoading, setIsLoading] = useState(false);
 
@@ -62,7 +65,7 @@ const useDropdownAction = (props: { prompt: PromptModel }) => {
     setIsLoading(true);
     switch (action) {
       case "delete":
-        if (window.confirm(`Are you sure you want to delete ${prompt.name}?`)) {
+        if (window.confirm(t("deleteConfirm", { name: prompt.name }))) {
           await DeletePrompt(prompt.id);
           RevalidateCache({
             page: "prompt",

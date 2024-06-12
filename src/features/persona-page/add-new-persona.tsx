@@ -82,33 +82,33 @@ export const AddNewPersona: FC<Props> = (props) => {
                 </>
               )}
               <div className="grid gap-2">
-                <Label>{t('persona:nameLabel')}</Label>
+                <Label>{t('persona:name.label')}</Label>
                 <Input
                   type="text"
                   required
                   name="name"
                   defaultValue={persona.name}
-                  placeholder={t('persona:namePlaceholder')}
+                  placeholder={t('persona:name.placeholder')}
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="description">{t('persona:shortDescriptionLabel')}</Label>
+                <Label htmlFor="description">{t('persona:shortDescription.label')}</Label>
                 <Input
                   type="text"
                   required
                   defaultValue={persona.description}
                   name="description"
-                  placeholder={t('persona:shortDescriptionPlaceholder')}
+                  placeholder={t('persona:shortDescription.placeholder')}
                 />
               </div>
               <div className="grid gap-2 flex-1 ">
-                <Label htmlFor="personaMessage">{t('persona:systemMessageLabel')}</Label>
+                <Label htmlFor="personaMessage">{t('persona:systemMessage.label')}</Label>
                 <Textarea
                   className="min-h-[300px]"
                   required
                   defaultValue={persona.personaMessage}
                   name="personaMessage"
-                  placeholder={t('persona:systemMessagePlaceholder')}
+                  placeholder={t('persona:systemMessage.placeholder')}
                 />
               </div>
             </div>

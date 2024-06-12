@@ -3,15 +3,17 @@ import { HeroButton } from "@/features/ui/hero";
 import { Globe } from "lucide-react";
 import { ExtensionModel } from "../extension-services/models";
 import { extensionStore } from "../extension-store";
+import { useTranslation } from 'react-i18next';
 
 export const BingSearch = () => {
+  const { t } = useTranslation("extension");
   const newExample = () => {
     const bingExample: ExtensionModel = {
       createdAt: new Date(),
-      description: "Bring up to date information with Bing Search",
+      description: t('bingSearch.description'),
       id: "",
-      name: "Bing Search",
-      executionSteps: `You are an expert in searching the web using BingSearch function. `,
+      name: t('bingSearch.title'),
+      executionSteps: t('bingSearch.systemMessage'),
       functions: [
         {
           code: `{
@@ -21,23 +23,23 @@ export const BingSearch = () => {
   "properties": {
     "query": {
       "type": "object",
-      "description": "Ues this as the search query parameters",
+      "description": "${t('bingSearch.codeExample.queryDescription')}",
       "properties": {
         "BING_SEARCH_QUERY": {
           "type": "string",
-          "description": "Search query from the user",
-          "example": "What is the current weather in Sydney, Australia?"
+          "description": "${t('bingSearch.codeExample.searchQueryExampleDescription')}",
+          "example": "${t('bingSearch.codeExample.searchQueryExample')}"
         }
       },
       "example": {
-        "BING_SEARCH_QUERY": "What is the current weather in Sydney, Australia?"
+        "BING_SEARCH_QUERY": "${t('bingSearch.codeExample.searchQueryExample')}"
       },
       "required": ["BING_SEARCH_QUERY"]
     }
   },
   "required": ["query"]
 },
-"description": "Use BingSearch to search for information on the web to bring up to date information"
+"description": "${t('bingSearch.codeExample.systemMessage')}"
 }
           `,
           endpoint:
@@ -51,7 +53,7 @@ export const BingSearch = () => {
         {
           id: uniqueId(),
           key: "Ocp-Apim-Subscription-Key",
-          value: "YOUR API KEY HERE",
+          value: t('bingSearch.apiKeyPlaceholder'),
         },
       ],
       isPublished: false,
@@ -64,8 +66,8 @@ export const BingSearch = () => {
 
   return (
     <HeroButton
-      title="Bing Search"
-      description="Bring up to date information with Bing Search"
+      title={t('bingSearch.title')}
+      description={t('bingSearch.description')}
       icon={<Globe />}
       onClick={newExample}
     />

@@ -15,10 +15,12 @@ import {
 import { Book } from "lucide-react";
 import { FC } from "react";
 import { inputPromptStore, useInputPromptState } from "./input-prompt-store";
+import { useTranslation } from 'react-i18next';
 
 interface SliderProps {}
 
 export const PromptSlider: FC<SliderProps> = (props) => {
+  const { t } = useTranslation('prompts');
   const { prompts, isLoading, isOpened } = useInputPromptState();
   return (
     <Sheet
@@ -41,12 +43,12 @@ export const PromptSlider: FC<SliderProps> = (props) => {
 
       <SheetContent className="min-w-[480px] flex flex-col">
         <SheetHeader>
-          <SheetTitle>Prompt Library</SheetTitle>
+          <SheetTitle>{t('title')}</SheetTitle>
         </SheetHeader>
         <ScrollArea className="flex-1 flex -mx-6">
           <div className="px-6 pb-6 whitespace-pre-wrap">
             <SheetDescription>
-              {!isLoading && prompts.length === 0 ? "There are no prompts" : ""}
+              {!isLoading && prompts.length === 0 ? t('noPromptsFound') : ""}
             </SheetDescription>
             <LoadingIndicator isLoading={isLoading} />
             {prompts.map((prompt) => (
