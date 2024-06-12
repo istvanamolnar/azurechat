@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { cn } from "@/ui/lib";
 import { MenuItem, menuIconProps } from "@/ui/menu";
@@ -8,6 +9,10 @@ import { menuStore, useMenuState } from "./menu-store";
 export const MenuTrayToggle = () => {
   const { t } = useTranslation();
   const { isMenuOpen } = useMenuState();
+
+  const path = usePathname();
+  const isChatPage = path.startsWith("/chat") || path.startsWith("/en/chat");
+  if (!isChatPage) return null;
 
   return (
     <MenuItem
