@@ -3,7 +3,7 @@ import { ThemeProvider } from "@/features/theme/theme-provider";
 import { Toaster } from "@/features/ui/toaster";
 import { cn } from "@/ui/lib";
 import { locales } from '@/utils/constants';
-import initTranslations from '../i18n';
+import initTranslations from './i18n';
 import TranslationsProvider from '@/utils/providers/translations-provider';
 
 import { Inter } from "next/font/google";

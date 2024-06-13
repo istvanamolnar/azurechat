@@ -37,11 +37,11 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Apply i18nRouter middleware
-  const i18nResponse = i18nRouter(request, i18nConfig);
-  if (i18nResponse) {
-    return i18nResponse;
-  }
+  // // Apply i18nRouter middleware
+  // const i18nResponse = i18nRouter(request, i18nConfig);
+  // if (i18nResponse) {
+  //   return i18nResponse;
+  // }
 
   return res;
 }
@@ -55,6 +55,6 @@ export const config = {
     "/api/chat:path*",
     "/api/images:path*",
     "/chat/:path*",
-    '/((?!api|static|.*\\..*|_next).*)'
+    // '/((?!api|static|.*\\..*|_next).*)'
   ],
 };
