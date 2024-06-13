@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.24.24.22086",
-      "templateHash": "16779160080190232837"
+      "version": "0.28.1.47646",
+      "templateHash": "12376958131188370963"
     }
   },
   "parameters": {
@@ -26,20 +26,11 @@
     },
     "openAILocation": {
       "type": "string",
-      "allowedValues": [
-        "australiaeast",
-        "canadaeast",
-        "francecentral",
-        "southindia",
-        "uksouth",
-        "swedencentral",
-        "westus"
-      ],
+      "defaultValue": "swedencentral",
       "metadata": {
         "azd": {
           "type": "location"
-        },
-        "description": "Location for the OpenAI resource group"
+        }
       }
     },
     "openAISku": {
@@ -52,19 +43,19 @@
     },
     "chatGptDeploymentCapacity": {
       "type": "int",
-      "defaultValue": 120
+      "defaultValue": 30
     },
     "chatGptDeploymentName": {
       "type": "string",
-      "defaultValue": "chat-gpt-35-turbo"
+      "defaultValue": "gpt-4o"
     },
     "chatGptModelName": {
       "type": "string",
-      "defaultValue": "gpt-35-turbo"
+      "defaultValue": "gpt-4o"
     },
     "chatGptModelVersion": {
       "type": "string",
-      "defaultValue": "1106"
+      "defaultValue": "2024-05-13"
     },
     "embeddingDeploymentName": {
       "type": "string",
@@ -72,7 +63,7 @@
     },
     "embeddingDeploymentCapacity": {
       "type": "int",
-      "defaultValue": 120
+      "defaultValue": 10
     },
     "embeddingModelName": {
       "type": "string",
@@ -80,12 +71,7 @@
     },
     "dalleLocation": {
       "type": "string",
-      "allowedValues": [
-        "swedencentral"
-      ],
-      "metadata": {
-        "description": "Location for the OpenAI DALL-E 3 instance resource group"
-      }
+      "defaultValue": "swedencentral"
     },
     "dalleDeploymentCapacity": {
       "type": "int",
@@ -105,13 +91,7 @@
     },
     "gptvisionLocation": {
       "type": "string",
-      "allowedValues": [
-        "swedencentral",
-        "westus"
-      ],
-      "metadata": {
-        "description": "Location for the GPT vision instance resource"
-      }
+      "defaultValue": "swedencentral"
     },
     "gptvisionDeploymentCapacity": {
       "type": "int",
@@ -282,14 +262,14 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.24.24.22086",
-              "templateHash": "14077555141603956691"
+              "version": "0.28.1.47646",
+              "templateHash": "10050802058527272772"
             }
           },
           "parameters": {
             "name": {
               "type": "string",
-              "defaultValue": "azurechat-demo"
+              "defaultValue": "aithoria-chat"
             },
             "resourceToken": {
               "type": "string"
@@ -310,15 +290,15 @@
             },
             "chatGptDeploymentName": {
               "type": "string",
-              "defaultValue": "chat-gpt-35-turbo"
+              "defaultValue": "gpt-4o"
             },
             "chatGptModelName": {
               "type": "string",
-              "defaultValue": "chat-gpt-35-turbo"
+              "defaultValue": "gpt-4o"
             },
             "chatGptModelVersion": {
               "type": "string",
-              "defaultValue": "1106"
+              "defaultValue": "2024-05-13"
             },
             "embeddingDeploymentName": {
               "type": "string",
@@ -384,7 +364,7 @@
             },
             "searchServiceIndexName": {
               "type": "string",
-              "defaultValue": "azure-chat"
+              "defaultValue": "aithoria-chat"
             },
             "storageServiceSku": {
               "type": "object"
@@ -406,26 +386,32 @@
             }
           },
           "variables": {
-            "openai_name": "[toLower(format('{0}-aillm-{1}', parameters('name'), parameters('resourceToken')))]",
-            "openai_dalle_name": "[toLower(format('{0}-aidalle-{1}', parameters('name'), parameters('resourceToken')))]",
-            "openai_gpt_vision_name": "[toLower(format('{0}-aivision-{1}', parameters('name'), parameters('resourceToken')))]",
-            "form_recognizer_name": "[toLower(format('{0}-form-{1}', parameters('name'), parameters('resourceToken')))]",
-            "speech_service_name": "[toLower(format('{0}-speech-{1}', parameters('name'), parameters('resourceToken')))]",
-            "cosmos_name": "[toLower(format('{0}-cosmos-{1}', parameters('name'), parameters('resourceToken')))]",
-            "search_name": "[toLower(format('{0}search{1}', parameters('name'), parameters('resourceToken')))]",
-            "webapp_name": "[toLower(format('{0}-webapp-{1}', parameters('name'), parameters('resourceToken')))]",
-            "appservice_name": "[toLower(format('{0}-app-{1}', parameters('name'), parameters('resourceToken')))]",
+            "openai_name": "[toLower(format('oai-llm-{0}-{1}', parameters('name'), parameters('resourceToken')))]",
+            "openai_dalle_name": "[toLower(format('oai-dalle-{0}-{1}', parameters('name'), parameters('resourceToken')))]",
+            "openai_gpt_vision_name": "[toLower(format('oai-vision-{0}-{1}', parameters('name'), parameters('resourceToken')))]",
+            "form_recognizer_name": "[toLower(format('form-{0}-{1}', parameters('name'), parameters('resourceToken')))]",
+            "speech_service_name": "[toLower(format('speech-{0}-{1}', parameters('name'), parameters('resourceToken')))]",
+            "cosmos_name": "[toLower(format('cosmos-{0}-{1}', parameters('name'), parameters('resourceToken')))]",
+            "search_name": "[toLower(format('search-{0}{1}', parameters('name'), parameters('resourceToken')))]",
+            "webapp_name": "[toLower(format('app-{0}-{1}', parameters('name'), parameters('resourceToken')))]",
+            "appservice_name": "[toLower(format('appsvc-{0}-{1}', parameters('name'), parameters('resourceToken')))]",
             "storage_prefix": "[take(parameters('name'), 8)]",
-            "storage_name": "[toLower(format('{0}sto{1}', variables('storage_prefix'), parameters('resourceToken')))]",
-            "kv_prefix": "[take(parameters('name'), 7)]",
-            "keyVaultName": "[toLower(format('{0}-kv-{1}', variables('kv_prefix'), parameters('resourceToken')))]",
-            "la_workspace_name": "[toLower(format('{0}-la-{1}', parameters('name'), parameters('resourceToken')))]",
+            "storage_name": "[toLower(format('sto{0}{1}', variables('storage_prefix'), parameters('resourceToken')))]",
+            "kv_prefix": "[take(parameters('name'), 8)]",
+            "rt_prefix": "[take(parameters('resourceToken'), 8)]",
+            "keyVaultName": "[toLower(format('kv-{0}-{1}', variables('kv_prefix'), variables('rt_prefix')))]",
+            "la_workspace_name": "[toLower(format('la-{0}-{1}', parameters('name'), parameters('resourceToken')))]",
             "diagnostic_setting_name": "AppServiceConsoleLogs",
             "keyVaultSecretsOfficerRole": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b86a8fe4-44ce-4948-aee5-eccb2c155cd7')]",
             "validStorageServiceImageContainerName": "[toLower(replace(parameters('storageServiceImageContainerName'), '-', ''))]",
             "databaseName": "chat",
             "historyContainerName": "history",
             "configContainerName": "config",
+            "chatHistoryContainerName": "chatHistory",
+            "documentsContainerName": "documents",
+            "extensionsContainerName": "extensions",
+            "personasContainerName": "personas",
+            "promptsContainerName": "prompts",
             "llmDeployments": [
               {
                 "name": "[parameters('chatGptDeploymentName')]",
@@ -933,6 +919,101 @@
               "properties": {
                 "resource": {
                   "id": "[variables('configContainerName')]",
+                  "partitionKey": {
+                    "paths": [
+                      "/userId"
+                    ],
+                    "kind": "Hash"
+                  }
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('cosmos_name'), variables('databaseName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+              "apiVersion": "2022-05-15",
+              "name": "[format('{0}/{1}/{2}', variables('cosmos_name'), variables('databaseName'), variables('chatHistoryContainerName'))]",
+              "properties": {
+                "resource": {
+                  "id": "[variables('chatHistoryContainerName')]",
+                  "partitionKey": {
+                    "paths": [
+                      "/userId"
+                    ],
+                    "kind": "Hash"
+                  }
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('cosmos_name'), variables('databaseName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+              "apiVersion": "2022-05-15",
+              "name": "[format('{0}/{1}/{2}', variables('cosmos_name'), variables('databaseName'), variables('documentsContainerName'))]",
+              "properties": {
+                "resource": {
+                  "id": "[variables('documentsContainerName')]",
+                  "partitionKey": {
+                    "paths": [
+                      "/userId"
+                    ],
+                    "kind": "Hash"
+                  }
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('cosmos_name'), variables('databaseName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+              "apiVersion": "2022-05-15",
+              "name": "[format('{0}/{1}/{2}', variables('cosmos_name'), variables('databaseName'), variables('extensionsContainerName'))]",
+              "properties": {
+                "resource": {
+                  "id": "[variables('extensionsContainerName')]",
+                  "partitionKey": {
+                    "paths": [
+                      "/userId"
+                    ],
+                    "kind": "Hash"
+                  }
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('cosmos_name'), variables('databaseName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+              "apiVersion": "2022-05-15",
+              "name": "[format('{0}/{1}/{2}', variables('cosmos_name'), variables('databaseName'), variables('personasContainerName'))]",
+              "properties": {
+                "resource": {
+                  "id": "[variables('personasContainerName')]",
+                  "partitionKey": {
+                    "paths": [
+                      "/userId"
+                    ],
+                    "kind": "Hash"
+                  }
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('cosmos_name'), variables('databaseName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+              "apiVersion": "2022-05-15",
+              "name": "[format('{0}/{1}/{2}', variables('cosmos_name'), variables('databaseName'), variables('promptsContainerName'))]",
+              "properties": {
+                "resource": {
+                  "id": "[variables('promptsContainerName')]",
                   "partitionKey": {
                     "paths": [
                       "/userId"

@@ -1,4 +1,4 @@
-param name string = 'azurechat-demo'
+param name string = 'aithoria-chat'
 param resourceToken string
 
 param openai_api_version string
@@ -6,9 +6,9 @@ param openai_api_version string
 param openAiLocation string
 param openAiSkuName string = 'S0'
 param chatGptDeploymentCapacity int = 30
-param chatGptDeploymentName string = 'chat-gpt-35-turbo'
-param chatGptModelName string = 'chat-gpt-35-turbo'
-param chatGptModelVersion string = '1106'
+param chatGptDeploymentName string = 'gpt-4o'
+param chatGptModelName string = 'gpt-4o'
+param chatGptModelVersion string = '2024-05-13'
 param embeddingDeploymentName string = 'text-embedding-ada-002'
 param embeddingDeploymentCapacity int = 10
 param embeddingModelName string = 'text-embedding-ada-002'
@@ -31,7 +31,7 @@ param speechServiceSkuName string = 'S0'
 param formRecognizerSkuName string = 'S0'
 
 param searchServiceSkuName string = 'standard'
-param searchServiceIndexName string = 'azure-chat'
+param searchServiceIndexName string = 'aithoria-chat'
 
 param storageServiceSku object
 param storageServiceImageContainerName string
@@ -43,23 +43,24 @@ param nextAuthHash string = uniqueString(newGuid())
 
 param tags object = {}
 
-var openai_name = toLower('${name}-aillm-${resourceToken}')
-var openai_dalle_name = toLower('${name}-aidalle-${resourceToken}')
-var openai_gpt_vision_name = toLower('${name}-aivision-${resourceToken}')
+var openai_name = toLower('oai-llm-${name}-${resourceToken}')
+var openai_dalle_name = toLower('oai-dalle-${name}-${resourceToken}')
+var openai_gpt_vision_name = toLower('oai-vision-${name}-${resourceToken}')
 
-var form_recognizer_name = toLower('${name}-form-${resourceToken}')
-var speech_service_name = toLower('${name}-speech-${resourceToken}')
-var cosmos_name = toLower('${name}-cosmos-${resourceToken}')
-var search_name = toLower('${name}search${resourceToken}')
-var webapp_name = toLower('${name}-webapp-${resourceToken}')
-var appservice_name = toLower('${name}-app-${resourceToken}')
+var form_recognizer_name = toLower('form-${name}-${resourceToken}')
+var speech_service_name = toLower('speech-${name}-${resourceToken}')
+var cosmos_name = toLower('cosmos-${name}-${resourceToken}')
+var search_name = toLower('search-${name}${resourceToken}')
+var webapp_name = toLower('app-${name}-${resourceToken}')
+var appservice_name = toLower('appsvc-${name}-${resourceToken}')
 // storage name must be less than 24 chars, alphanumeric only - token is 13
 var storage_prefix = take(name, 8)
-var storage_name = toLower('${storage_prefix}sto${resourceToken}')
+var storage_name = toLower('sto${storage_prefix}${resourceToken}')
 // keyvault name must be less than 24 chars - token is 13
-var kv_prefix = take(name, 7)
-var keyVaultName = toLower('${kv_prefix}-kv-${resourceToken}')
-var la_workspace_name = toLower('${name}-la-${resourceToken}')
+var kv_prefix = take(name, 8)
+var rt_prefix = take(resourceToken, 8)
+var keyVaultName = toLower('kv-${kv_prefix}-${rt_prefix}')
+var la_workspace_name = toLower('la-${name}-${resourceToken}')
 var diagnostic_setting_name = 'AppServiceConsoleLogs'
 
 var keyVaultSecretsOfficerRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b86a8fe4-44ce-4948-aee5-eccb2c155cd7')
@@ -69,6 +70,12 @@ var validStorageServiceImageContainerName = toLower(replace(storageServiceImageC
 var databaseName = 'chat'
 var historyContainerName = 'history'
 var configContainerName = 'config'
+
+var chatHistoryContainerName = 'chatHistory'
+var documentsContainerName = 'documents'
+var extensionsContainerName = 'extensions'
+var personasContainerName = 'personas'
+var promptsContainerName = 'prompts'
 
 var llmDeployments = [
   {
@@ -430,6 +437,86 @@ resource configContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/con
   }
 }
 
+resource chatHistoryContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-05-15' = {
+  name: chatHistoryContainerName
+  parent: database
+  properties: {
+    resource: {
+      id: chatHistoryContainerName
+      partitionKey: {
+        paths: [
+          '/userId'
+        ]
+        kind: 'Hash'
+      }
+    }
+  }
+}
+
+resource documentsContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-05-15' = {
+  name: documentsContainerName
+  parent: database
+  properties: {
+    resource: {
+      id: documentsContainerName
+      partitionKey: {
+        paths: [
+          '/userId'
+        ]
+        kind: 'Hash'
+      }
+    }
+  }
+}
+
+resource extensionsContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-05-15' = {
+  name: extensionsContainerName
+  parent: database
+  properties: {
+    resource: {
+      id: extensionsContainerName
+      partitionKey: {
+        paths: [
+          '/userId'
+        ]
+        kind: 'Hash'
+      }
+    }
+  }
+}
+
+resource personasContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-05-15' = {
+  name: personasContainerName
+  parent: database
+  properties: {
+    resource: {
+      id: personasContainerName
+      partitionKey: {
+        paths: [
+          '/userId'
+        ]
+        kind: 'Hash'
+      }
+    }
+  }
+}
+
+resource promptsContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-05-15' = {
+  name: promptsContainerName
+  parent: database
+  properties: {
+    resource: {
+      id: promptsContainerName
+      partitionKey: {
+        paths: [
+          '/userId'
+        ]
+        kind: 'Hash'
+      }
+    }
+  }
+}
+
 resource formRecognizer 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: form_recognizer_name
   location: location
@@ -478,10 +565,11 @@ resource llmdeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
   name: deployment.name
   properties: {
     model: deployment.model
-    raiPolicyName: null
+    raiPolicyName: contains(deployment, 'raiPolicyName') ? deployment.raiPolicyName : null
   }
-  sku: {
+  sku: contains(deployment, 'sku') ? deployment.sku : {
     name: 'Standard'
+    capacity: deployment.capacity
   }
 }]
 
