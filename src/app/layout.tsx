@@ -12,11 +12,11 @@ import "@/app/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: `Aithoria - Grow your Business with Hybrid Intelligence - KI`,
-  description: 'Starte deine digitale Zukunft mit Hybrid Intelligence – optimale KI-Lösungen für dein Unternehmen. → Hier gehts zur Microsoft KI-Roadmap',
+  title: `Aithoria - KI für alle. Gemeinsam besser arbeiten.`,
+  description: 'Starte deine digitale Zukunft mit Hybrid Intelligence - optimale KI-Lösungen für dein Unternehmen. → Hier gehts zur Microsoft KI-Roadmap',
   openGraph: {
-    title: `Aithoria - Grow your Business with Hybrid Intelligence - KI`,
-    description: 'Starte deine digitale Zukunft mit Hybrid Intelligence – optimale KI-Lösungen für dein Unternehmen. → Hier gehts zur Microsoft KI-Roadmap',
+    title: `Aithoria - KI für alle. Gemeinsam besser arbeiten.`,
+    description: 'Starte deine digitale Zukunft mit Hybrid Intelligence - optimale KI-Lösungen für dein Unternehmen. → Hier gehts zur Microsoft KI-Roadmap',
     images: [{ url: `/LogoMitSlogan.png`, width: 2048, height: 532 }],
     siteName: `Aithoria - Azure Chat`,
   }
