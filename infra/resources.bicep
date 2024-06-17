@@ -68,8 +68,6 @@ var keyVaultSecretsOfficerRole = subscriptionResourceId('Microsoft.Authorization
 var validStorageServiceImageContainerName = toLower(replace(storageServiceImageContainerName, '-', ''))
 
 var databaseName = 'chat'
-var historyContainerName = 'history'
-var configContainerName = 'config'
 
 var chatHistoryContainerName = 'chatHistory'
 var documentsContainerName = 'documents'
@@ -401,38 +399,6 @@ resource database 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2022-05-15
   properties: {
     resource: {
       id: databaseName
-    }
-  }
-}
-
-resource historyContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-05-15' = {
-  name: historyContainerName
-  parent: database
-  properties: {
-    resource: {
-      id: historyContainerName
-      partitionKey: {
-        paths: [
-          '/userId'
-        ]
-        kind: 'Hash'
-      }
-    }
-  }
-}
-
-resource configContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-05-15' = {
-  name: configContainerName
-  parent: database
-  properties: {
-    resource: {
-      id: configContainerName
-      partitionKey: {
-        paths: [
-          '/userId'
-        ]
-        kind: 'Hash'
-      }
     }
   }
 }

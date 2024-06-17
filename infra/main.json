@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.28.1.47646",
-      "templateHash": "3436160247673993355"
+      "templateHash": "14339937906053588412"
     }
   },
   "parameters": {
@@ -263,7 +263,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.28.1.47646",
-              "templateHash": "13822999440361805497"
+              "templateHash": "11945956169483554765"
             }
           },
           "parameters": {
@@ -405,8 +405,6 @@
             "keyVaultSecretsOfficerRole": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b86a8fe4-44ce-4948-aee5-eccb2c155cd7')]",
             "validStorageServiceImageContainerName": "[toLower(replace(parameters('storageServiceImageContainerName'), '-', ''))]",
             "databaseName": "chat",
-            "historyContainerName": "history",
-            "configContainerName": "config",
             "chatHistoryContainerName": "chatHistory",
             "documentsContainerName": "documents",
             "extensionsContainerName": "extensions",
@@ -891,44 +889,6 @@
               },
               "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts', variables('cosmos_name'))]"
-              ]
-            },
-            {
-              "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-              "apiVersion": "2022-05-15",
-              "name": "[format('{0}/{1}/{2}', variables('cosmos_name'), variables('databaseName'), variables('historyContainerName'))]",
-              "properties": {
-                "resource": {
-                  "id": "[variables('historyContainerName')]",
-                  "partitionKey": {
-                    "paths": [
-                      "/userId"
-                    ],
-                    "kind": "Hash"
-                  }
-                }
-              },
-              "dependsOn": [
-                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('cosmos_name'), variables('databaseName'))]"
-              ]
-            },
-            {
-              "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-              "apiVersion": "2022-05-15",
-              "name": "[format('{0}/{1}/{2}', variables('cosmos_name'), variables('databaseName'), variables('configContainerName'))]",
-              "properties": {
-                "resource": {
-                  "id": "[variables('configContainerName')]",
-                  "partitionKey": {
-                    "paths": [
-                      "/userId"
-                    ],
-                    "kind": "Hash"
-                  }
-                }
-              },
-              "dependsOn": [
-                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('cosmos_name'), variables('databaseName'))]"
               ]
             },
             {
