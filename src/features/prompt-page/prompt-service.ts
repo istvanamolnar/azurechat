@@ -11,7 +11,7 @@ import {
 } from "@/features/prompt-page/models";
 import { SqlQuerySpec } from "@azure/cosmos";
 import { getCurrentUser, userHashedId } from "../auth-page/helpers";
-import { ConfigContainer } from "../common/services/cosmos";
+import { PromptsContainer } from "../common/services/cosmos";
 import { uniqueId } from "../common/util";
 
 export const CreatePrompt = async (
@@ -47,7 +47,7 @@ export const CreatePrompt = async (
       return valid;
     }
 
-    const { resource } = await ConfigContainer().items.create<PromptModel>(
+    const { resource } = await PromptsContainer().items.create<PromptModel>(
       modelToSave
     );
 
@@ -92,7 +92,7 @@ export const FindAllPrompts = async (): Promise<
       ],
     };
 
-    const { resources } = await ConfigContainer()
+    const { resources } = await PromptsContainer()
       .items.query<PromptModel>(querySpec)
       .fetchAll();
 
@@ -141,7 +141,7 @@ export const DeletePrompt = async (
     const promptResponse = await EnsurePromptOperation(promptId);
 
     if (promptResponse.status === "OK") {
-      const { resource: deletedPrompt } = await ConfigContainer()
+      const { resource: deletedPrompt } = await PromptsContainer()
         .item(promptId, promptResponse.response.userId)
         .delete();
 
@@ -182,7 +182,7 @@ export const FindPromptByID = async (
       ],
     };
 
-    const { resources } = await ConfigContainer()
+    const { resources } = await PromptsContainer()
       .items.query<PromptModel>(querySpec)
       .fetchAll();
 
@@ -238,7 +238,7 @@ export const UpsertPrompt = async (
         return validationResponse;
       }
 
-      const { resource } = await ConfigContainer().items.upsert<PromptModel>(
+      const { resource } = await PromptsContainer().items.upsert<PromptModel>(
         modelToUpdate
       );
 

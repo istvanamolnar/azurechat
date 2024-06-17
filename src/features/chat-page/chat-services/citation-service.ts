@@ -1,6 +1,6 @@
 import { userHashedId } from "@/features/auth-page/helpers";
 import { ServerActionResponse } from "@/features/common/server-action-response";
-import { HistoryContainer } from "@/features/common/services/cosmos";
+import { DocumentsContainer } from "@/features/common/services/cosmos";
 import { uniqueId } from "@/features/common/util";
 import { SqlQuerySpec } from "@azure/cosmos";
 import { DocumentSearchResponse } from "./azure-ai-search/azure-ai-search";
@@ -11,7 +11,7 @@ export const CreateCitation = async (
 ): Promise<ServerActionResponse<ChatCitationModel>> => {
   try {
     const { resource } =
-      await HistoryContainer().items.create<ChatCitationModel>(model);
+      await DocumentsContainer().items.create<ChatCitationModel>(model);
 
     if (!resource) {
       return {
@@ -77,7 +77,7 @@ export const FindCitationByID = async (
       ],
     };
 
-    const { resources } = await HistoryContainer()
+    const { resources } = await DocumentsContainer()
       .items.query<ChatCitationModel>(querySpec)
       .fetchAll();
 

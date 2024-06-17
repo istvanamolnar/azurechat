@@ -14,7 +14,7 @@ import {
   NEW_CHAT_NAME,
 } from "@/features/theme/theme-config";
 import { SqlQuerySpec } from "@azure/cosmos";
-import { HistoryContainer } from "../../common/services/cosmos";
+import { ChatHistoryContainer } from "../../common/services/cosmos";
 import { DeleteDocuments } from "./azure-ai-search/azure-ai-search";
 import { FindAllChatDocuments } from "./chat-document-service";
 import { FindAllChatMessagesForCurrentUser } from "./chat-message-service";
@@ -47,7 +47,7 @@ export const FindAllChatThreadForCurrentUser = async (): Promise<
       ],
     };
 
-    const { resources } = await HistoryContainer()
+    const { resources } = await ChatHistoryContainer()
       .items.query<ChatThreadModel>(querySpec, {
         partitionKey: await userHashedId(),
       })
@@ -91,7 +91,7 @@ export const FindChatThreadForCurrentUser = async (
       ],
     };
 
-    const { resources } = await HistoryContainer()
+    const { resources } = await ChatHistoryContainer()
       .items.query<ChatThreadModel>(querySpec)
       .fetchAll();
 
@@ -135,7 +135,7 @@ export const SoftDeleteChatThreadForCurrentUser = async (
           ...chat,
         };
         itemToUpdate.isDeleted = true;
-        await HistoryContainer().items.upsert(itemToUpdate);
+        await ChatHistoryContainer().items.upsert(itemToUpdate);
       });
 
       const chatDocumentsResponse = await FindAllChatDocuments(chatThreadID);
@@ -155,11 +155,11 @@ export const SoftDeleteChatThreadForCurrentUser = async (
           ...chatDocument,
         };
         itemToUpdate.isDeleted = true;
-        await HistoryContainer().items.upsert(itemToUpdate);
+        await ChatHistoryContainer().items.upsert(itemToUpdate);
       });
 
       chatThreadResponse.response.isDeleted = true;
-      await HistoryContainer().items.upsert(chatThreadResponse.response);
+      await ChatHistoryContainer().items.upsert(chatThreadResponse.response);
     }
 
     return chatThreadResponse;
@@ -249,7 +249,7 @@ export const UpsertChatThread = async (
     }
 
     chatThread.lastMessageAt = new Date();
-    const { resource } = await HistoryContainer().items.upsert<ChatThreadModel>(
+    const { resource } = await ChatHistoryContainer().items.upsert<ChatThreadModel>(
       chatThread
     );
 
@@ -291,7 +291,7 @@ export const CreateChatThread = async (): Promise<
       extension: [],
     };
 
-    const { resource } = await HistoryContainer().items.create<ChatThreadModel>(
+    const { resource } = await ChatHistoryContainer().items.create<ChatThreadModel>(
       modelToSave
     );
     if (resource) {

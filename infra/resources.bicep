@@ -50,7 +50,7 @@ var openai_gpt_vision_name = toLower('oai-vision-${name}-${resourceToken}')
 var form_recognizer_name = toLower('form-${name}-${resourceToken}')
 var speech_service_name = toLower('speech-${name}-${resourceToken}')
 var cosmos_name = toLower('cosmos-${name}-${resourceToken}')
-var search_name = toLower('search-${name}${resourceToken}')
+var search_name = toLower('search-${name}-${resourceToken}')
 var webapp_name = toLower('app-${name}-${resourceToken}')
 var appservice_name = toLower('appsvc-${name}-${resourceToken}')
 // storage name must be less than 24 chars, alphanumeric only - token is 13

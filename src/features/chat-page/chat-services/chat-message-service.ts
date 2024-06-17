@@ -5,7 +5,7 @@ import { userHashedId } from "@/features/auth-page/helpers";
 import { ServerActionResponse } from "@/features/common/server-action-response";
 import { uniqueId } from "@/features/common/util";
 import { SqlQuerySpec } from "@azure/cosmos";
-import { HistoryContainer } from "../../common/services/cosmos";
+import { ChatHistoryContainer } from "../../common/services/cosmos";
 import { ChatMessageModel, ChatRole, MESSAGE_ATTRIBUTE } from "./models";
 
 export const FindTopChatMessagesForCurrentUser = async (
@@ -40,7 +40,7 @@ export const FindTopChatMessagesForCurrentUser = async (
       ],
     };
 
-    const { resources } = await HistoryContainer()
+    const { resources } = await ChatHistoryContainer()
       .items.query<ChatMessageModel>(querySpec)
       .fetchAll();
 
@@ -87,7 +87,7 @@ export const FindAllChatMessagesForCurrentUser = async (
       ],
     };
 
-    const { resources } = await HistoryContainer()
+    const { resources } = await ChatHistoryContainer()
       .items.query<ChatMessageModel>(querySpec)
       .fetchAll();
 
@@ -149,7 +149,7 @@ export const UpsertChatMessage = async (
     };
 
     const { resource } =
-      await HistoryContainer().items.upsert<ChatMessageModel>(modelToSave);
+      await ChatHistoryContainer().items.upsert<ChatMessageModel>(modelToSave);
 
     if (resource) {
       return {

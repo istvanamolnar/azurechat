@@ -2,7 +2,7 @@
 import "server-only";
 
 import { userHashedId } from "@/features/auth-page/helpers";
-import { HistoryContainer } from "@/features/common/services/cosmos";
+import { DocumentsContainer } from "@/features/common/services/cosmos";
 
 import { RevalidateCache } from "@/features/common/navigation-helpers";
 import { ServerActionResponse } from "@/features/common/server-action-response";
@@ -129,7 +129,7 @@ export const FindAllChatDocuments = async (
       ],
     };
 
-    const { resources } = await HistoryContainer()
+    const { resources } = await DocumentsContainer()
       .items.query<ChatDocumentModel>(querySpec)
       .fetchAll();
 
@@ -176,7 +176,7 @@ export const CreateChatDocument = async (
     };
 
     const { resource } =
-      await HistoryContainer().items.upsert<ChatDocumentModel>(modelToSave);
+      await DocumentsContainer().items.upsert<ChatDocumentModel>(modelToSave);
     RevalidateCache({
       page: "chat",
       params: chatThreadID,
@@ -213,7 +213,7 @@ export async function SoftDeleteChatDocument(
   doc: ChatDocumentModel
 ): Promise<ServerActionResponse<boolean>> {
   try {
-    const { resource } = await HistoryContainer().items.upsert<ChatDocumentModel>(
+    const { resource } = await DocumentsContainer().items.upsert<ChatDocumentModel>(
       {
         ...doc,
         isDeleted: true,

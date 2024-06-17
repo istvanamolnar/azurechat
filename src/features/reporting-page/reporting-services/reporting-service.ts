@@ -6,7 +6,7 @@ import {
   MESSAGE_ATTRIBUTE,
 } from "@/features/chat-page/chat-services/models";
 import { ServerActionResponse } from "@/features/common/server-action-response";
-import { HistoryContainer } from "@/features/common/services/cosmos";
+import { ChatHistoryContainer } from "@/features/common/services/cosmos";
 import { SqlQuerySpec } from "@azure/cosmos";
 
 export const FindAllChatThreadsForAdmin = async (
@@ -42,7 +42,7 @@ export const FindAllChatThreadsForAdmin = async (
       ],
     };
 
-    const { resources } = await HistoryContainer()
+    const { resources } = await ChatHistoryContainer()
       .items.query<ChatThreadModel>(querySpec)
       .fetchAll();
     return {
@@ -85,7 +85,7 @@ export const FindAllChatMessagesForAdmin = async (
       ],
     };
 
-    const { resources } = await HistoryContainer()
+    const { resources } = await ChatHistoryContainer()
       .items.query<ChatMessageModel>(querySpec)
       .fetchAll();
 
