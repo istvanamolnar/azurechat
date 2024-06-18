@@ -32,6 +32,7 @@ param formRecognizerSkuName string = 'S0'
 
 param searchServiceSkuName string = 'standard'
 param searchServiceIndexName string = 'aithoria-chat'
+param searchServiceLocation string = 'eastus'
 
 param storageServiceSku object
 param storageServiceImageContainerName string
@@ -499,7 +500,7 @@ resource formRecognizer 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource searchService 'Microsoft.Search/searchServices@2022-09-01' = {
   name: search_name
-  location: location
+  location: searchServiceLocation
   tags: tags
   properties: {
     partitionCount: 1
