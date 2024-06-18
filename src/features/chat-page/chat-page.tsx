@@ -1,6 +1,7 @@
 "use client";
 import { ChatInput } from "@/features/chat-page/chat-input/chat-input";
 import { chatStore, useChat } from "@/features/chat-page/chat-store";
+import { ChatDocumentModel } from '@/features/documents-page/documents-services/models';
 import { ChatLoading } from "@/features/ui/chat/chat-message-area/chat-loading";
 import { ChatMessageArea } from "@/features/ui/chat/chat-message-area/chat-message-area";
 import ChatMessageContainer from "@/features/ui/chat/chat-message-area/chat-message-container";
@@ -11,7 +12,6 @@ import { FC, useEffect, useRef } from "react";
 import { ExtensionModel } from "../extensions-page/extension-services/models";
 import { ChatHeader } from "./chat-header/chat-header";
 import {
-  ChatDocumentModel,
   ChatMessageModel,
   ChatThreadModel,
 } from "./chat-services/models";

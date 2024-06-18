@@ -1,3 +1,4 @@
+import { ChatDocumentModel } from '@/features/documents-page/documents-services/models';
 import { Button } from "@/features/ui/button";
 import { ScrollArea } from "@/features/ui/scroll-area";
 import {
@@ -9,7 +10,6 @@ import {
 } from "@/features/ui/sheet";
 import { File } from "lucide-react";
 import { FC } from "react";
-import { ChatDocumentModel } from "../chat-services/models";
 import { useTranslation } from 'react-i18next';
 
 interface Props {

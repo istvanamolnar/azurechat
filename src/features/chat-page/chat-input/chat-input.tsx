@@ -21,7 +21,7 @@ import { StopChat } from "@/features/ui/chat/chat-input-area/stop-chat";
 import { SubmitChat } from "@/features/ui/chat/chat-input-area/submit-chat";
 import React, { useRef } from "react";
 import { chatStore, useChat } from "../chat-store";
-import { fileStore, useFileStore } from "./file/file-store";
+import { fileStore, useFileStore } from "@/features/common/services/file/file-store";
 import { PromptSlider } from "./prompt/prompt-slider";
 import {
   speechToTextStore,
@@ -32,6 +32,8 @@ import {
   useTextToSpeech,
 } from "./speech/use-text-to-speech";
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/features/ui/button';
+import { Upload } from 'lucide-react';
 
 export const ChatInput = () => {
   const { t } = useTranslation();
@@ -83,7 +85,11 @@ export const ChatInput = () => {
             onClick={(formData) =>
               fileStore.onFileChange({ formData, chatThreadId, t })
             }
-          />
+          >
+            <Button size="icon" variant={"ghost"} type="button" aria-label="Attach file to chat">
+              <Upload size={16} />
+            </Button>
+          </AttachFile>
           <PromptSlider />
         </ChatInputSecondaryActionArea>
         <ChatInputPrimaryActionArea>

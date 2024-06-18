@@ -1,8 +1,9 @@
+import { ChatThreadModel } from "@/features/chat-page/chat-services/models";
+import { ChatDocumentModel } from '@/features/documents-page/documents-services/models';
 import { ExtensionModel } from "@/features/extensions-page/extension-services/models";
 import { CHAT_DEFAULT_PERSONA } from "@/features/theme/theme-config";
 import { UserRoundCog } from "lucide-react";
 import { FC } from "react";
-import { ChatDocumentModel, ChatThreadModel } from "../chat-services/models";
 import { DocumentDetail } from "./document-detail";
 import { ExtensionDetail } from "./extension-detail";
 import { PersonaDetail } from "./persona-detail";

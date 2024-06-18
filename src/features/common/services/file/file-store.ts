@@ -6,12 +6,12 @@ import {
   showSuccess,
 } from "@/features/globals/global-message-store";
 import { proxy, useSnapshot } from "valtio";
-import { IndexDocuments } from "../../chat-services/azure-ai-search/azure-ai-search";
+import { IndexDocuments } from "@/features/chat-page/chat-services/azure-ai-search/azure-ai-search";
 import {
   CrackDocument,
   CreateChatDocument,
-} from "../../chat-services/chat-document-service";
-import { chatStore } from "../../chat-store";
+} from "@/features/chat-page/chat-services/chat-document-service";
+import { chatStore } from "@/features/chat-page/chat-store";
 import { TFunction } from 'i18next';
 
 class FileStore {

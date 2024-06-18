@@ -1,0 +1,15 @@
+{
+  "generalDescription": "Gemeinsame Nutzung von Unternehmensdokumenten durch Kollegen zur sicheren und privaten Erweiterung der Chat-Funktionen",
+  "library": {
+    "title": "Bibliothek",
+    "description": "Dokumente, die von Kollegen geteilt wurden"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "description": "Einstellungen für die Dokumentenbibliothek"
+  },
+  "uploadDocument": {
+    "title": "Dokument hochladen",
+    "description": "Auswahl der zu verarbeitenden Dokumente"
+  }
+}

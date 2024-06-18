@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  ChatDocumentModel,
   ChatMessageModel,
 } from "@/features/chat-page/chat-services/models";
+import { ChatDocumentModel } from '@/features/documents-page/documents-services/models';
 import { ChatMessageArea } from "@/features/ui/chat/chat-message-area/chat-message-area";
 import ChatMessageContainer from "@/features/ui/chat/chat-message-area/chat-message-container";
 import ChatMessageContentArea from "@/features/ui/chat/chat-message-area/chat-message-content";
-import MessageContent from "../chat-page/message-content";
+import MessageContent from "@/features/chat-page/message-content";
 
 interface ReportingChatPageProps {
   messages: Array<ChatMessageModel>;

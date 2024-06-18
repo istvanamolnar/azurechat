@@ -9,6 +9,7 @@ import {
 import { RedirectToChatThread } from "@/features/common/navigation-helpers";
 import { ServerActionResponse } from "@/features/common/server-action-response";
 import { uniqueId } from "@/features/common/util";
+import { ChatDocumentModel } from '@/features/documents-page/documents-services/models';
 import {
   CHAT_DEFAULT_PERSONA,
   NEW_CHAT_NAME,
@@ -20,7 +21,6 @@ import { FindAllChatDocuments } from "./chat-document-service";
 import { FindAllChatMessagesForCurrentUser } from "./chat-message-service";
 import {
   CHAT_THREAD_ATTRIBUTE,
-  ChatDocumentModel,
   ChatThreadModel,
 } from "./models";
 

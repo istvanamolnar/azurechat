@@ -28,7 +28,7 @@ export async function generateStaticParams() {
   return locales.map(l => ({ locale: l.value }));
 };
 
-const namespaces = ['auth', 'chat', 'common', 'extension', 'mainMenu', 'persona', 'prompts'];
+const namespaces = ['auth', 'chat', 'common', 'data-source', 'extension', 'mainMenu', 'persona', 'prompts'];
 
 export default async function RootLayout({
   children,

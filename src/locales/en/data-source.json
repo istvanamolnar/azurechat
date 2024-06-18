@@ -1,0 +1,15 @@
+{
+  "generalDescription": "Share company documents among colleagues to extend chat-capabilities securely",
+  "library": {
+    "title": "Library",
+    "description": "Browse and search through all documents in the library"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Configure the document library"
+  },
+  "uploadDocument": {
+    "title": "Upload Document",
+    "description": "Select documents to be processed"
+  }
+}

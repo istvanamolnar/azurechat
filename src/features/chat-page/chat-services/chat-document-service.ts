@@ -1,6 +1,7 @@
 "use server";
 import "server-only";
 
+import { CHAT_DOCUMENT_ATTRIBUTE, ChatDocumentModel } from "@/features/documents-page/documents-services/models";
 import { userHashedId } from "@/features/auth-page/helpers";
 import { DocumentsContainer } from "@/features/common/services/cosmos";
 
@@ -10,7 +11,6 @@ import { DocumentIntelligenceInstance } from "@/features/common/services/documen
 import { uniqueId } from "@/features/common/util";
 import { SqlQuerySpec } from "@azure/cosmos";
 import { EnsureIndexIsCreated } from "./azure-ai-search/azure-ai-search";
-import { CHAT_DOCUMENT_ATTRIBUTE, ChatDocumentModel } from "./models";
 
 const MAX_UPLOAD_DOCUMENT_SIZE: number = 20000000;
 const CHUNK_SIZE = 2300;
