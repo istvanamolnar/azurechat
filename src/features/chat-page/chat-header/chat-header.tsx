@@ -4,9 +4,9 @@ import { ExtensionModel } from "@/features/extensions-page/extension-services/mo
 import { CHAT_DEFAULT_PERSONA } from "@/features/theme/theme-config";
 import { UserRoundCog } from "lucide-react";
 import { FC } from "react";
-import { DocumentDetail } from "./document-detail";
 import { ExtensionDetail } from "./extension-detail";
 import { PersonaDetail } from "./persona-detail";
+// import { DocumentDetail } from "./document-detail";
 
 interface Props {
   chatThread: ChatThreadModel;
@@ -32,7 +32,7 @@ export const ChatHeader: FC<Props> = (props) => {
         </div>
         <div className="flex gap-2">
           <PersonaDetail chatThread={props.chatThread} />
-          <DocumentDetail chatDocuments={props.chatDocuments} />
+          {/* <DocumentDetail chatDocuments={props.chatDocuments} /> */}
           <ExtensionDetail
             disabled={props.chatDocuments.length !== 0}
             extensions={props.extensions}

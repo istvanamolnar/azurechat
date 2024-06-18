@@ -10,11 +10,12 @@
     "template": "Erstellen Sie eine Miniaturstadt mit bunten Gebäuden und grünen Bäumen mit [ikonisches Gebäude]. Das [ikonische Gebäude] befindet sich in der Mitte des Bildes, umgeben von einem unscharfen Hintergrund mit vielen [Name des einheimischen Baums] Bäumen. Das Bild hat eine verträumte und skurrile Stimmung, mit einer geringen Tiefenschärfe und einem hohen Blickwinkel. Die Stadt sieht wie ein Spielzeug oder ein Modell aus, mit verschiedenen Stilen und Formen von Gebäuden.",
     "title": "Skurrile Stadt"
   },
-  "noPromptsFound": "Es gibt keine Prompts",
   "name": {
     "label": "Name",
     "placeholder": "Name des Prompts"
   },
+  "noPromptsFound": "Es gibt keine Prompts",
+  "openPromptLibrary": "Prompt-Bibliothek öffnen",
   "problemFraming": {
     "description": "Problemdarstellung für ein neues Produkt",
     "template": "Gegeben sei die folgende Problemstellung:\n[PROBLEMSTELLUNG]\n\nErarbeiten Sie eine Antwort mit den folgenden Punkten:\n1. Rahmung des Problems\n2. Lösungsübersicht und Empfehlungen\n3. Auflistung des empfohlenen MVP-Umfangs\n4. Wie man die Benutzerakzeptanz sicherstellt\n5. Wie man den Erfolg misst\n8. Ähnliche Produkte auflisten\n9. Potenzielle Sponsorenfrage (5 Fragen)",

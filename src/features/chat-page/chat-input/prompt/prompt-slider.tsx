@@ -35,7 +35,8 @@ export const PromptSlider: FC<SliderProps> = (props) => {
           type="button"
           variant={"ghost"}
           onClick={() => inputPromptStore.openPrompt()}
-          aria-label="Open prompt library"
+          aria-label={t('openPromptLibrary')}
+          title={t('openPromptLibrary')}
         >
           <Book size={16} />
         </Button>

@@ -18,6 +18,7 @@
   "rename": "Rename",
   "renameThread": "Enter the new name for the chat thread:",
   "signOut": "Sign out",
+  "submitMessage": "Submit message",
   "themesLabel": "Themes",
   "uploadedSuccessfully": "uploaded successfully."
 }

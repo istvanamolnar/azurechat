@@ -15,6 +15,7 @@
     "placeholder": "Name of your Prompt"
   },
   "noPromptsFound": "There are no prompts",
+  "openPromptLibrary": "Open Prompt Library",
   "problemFraming": {
     "description": "Problem Framing for a new product",
     "template": "Given the following problem statement:\n[PROBLEM STATEMENT]\n\nGenerate a response with the following points:\n1. Problem framing\n2. Solution overview and recommendations\n3. List down the recommended MVP Scope\n4. How to ensure user adoption\n5. How to measure success\n8. List down similar products\n9. Potential sponsor question (5 questions)",
