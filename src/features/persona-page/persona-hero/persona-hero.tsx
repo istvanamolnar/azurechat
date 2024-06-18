@@ -11,7 +11,7 @@ export const PersonaHero = () => {
       title={
         <>
           <UserRoundCog size={36} strokeWidth={1.5} />
-          <span>{t('common:persona')}</span>
+          <span className={'pl-4'}>{t('common:persona')}</span>
         </>
       }
       description={t('generalDescription')}

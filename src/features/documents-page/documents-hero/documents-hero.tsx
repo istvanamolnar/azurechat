@@ -13,7 +13,7 @@ export const DocumentsHero = () => {
       title={
         <>
           <HardDrive size={36} strokeWidth={1.5} />
-          <span>{t('common:documents')}</span>
+          <span className={'pl-4'}>{t('common:documents')}</span>
         </>
       }
       description={t('generalDescription', { AI_NAME })}

@@ -15,7 +15,7 @@ export const ExtensionHero = () => {
       title={
         <>
           <Blocks size={36} strokeWidth={1.5} />
-          <span>{t('common:extensions')}</span>
+          <span className={'pl-4'}>{t('common:extensions')}</span>
         </>
       }
       description={t('extension:generalDescription', { AI_NAME })}

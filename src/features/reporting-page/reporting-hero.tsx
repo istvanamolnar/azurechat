@@ -8,7 +8,7 @@ export const ReportingHero = () => {
       title={
         <>
           <Sheet size={36} strokeWidth={1.5} />
-          Chat Report
+          <span className={'pl-4'}>Chat Report</span>
         </>
       }
       description={

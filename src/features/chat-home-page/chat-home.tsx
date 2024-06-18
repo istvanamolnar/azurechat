@@ -23,12 +23,14 @@ export const ChatHome: FC<ChatPersonaProps> = (props) => {
             <>
               <Image
                 src={"/ai-icon.png"}
-                width={60}
-                height={60}
+                width={50}
+                height={50}
                 quality={100}
                 alt="ai-icon"
-              />{" "}
-              {AI_NAME}
+              />
+              <span className={'pl-4'}>
+                {AI_NAME}
+              </span>
             </>
           }
           description={AI_DESCRIPTION}

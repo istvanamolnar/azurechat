@@ -20,8 +20,8 @@ export const DocumentsPage: FC<DocumentsPageProps> = async (props) => {
         <DocumentsHero />
         <div className="container max-w-4xl py-3">
           {documentsResponse.response.map((document) => (
-            <div key={document.id}>
-              <p>{document.name}</p>
+            <div className={'py-1'} key={document.id}>
+              <span>{document.name}</span>
             </div>
           ))}
         </div>

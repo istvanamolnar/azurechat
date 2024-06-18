@@ -11,7 +11,7 @@ export const PromptHero = () => {
       title={
         <>
           <Book size={36} strokeWidth={1.5} />
-          <span>{t('title')}</span>
+          <span className={'pl-4'}>{t('title')}</span>
         </>
       }
       description={t('description')}
