@@ -1,7 +1,7 @@
 "use client";
 import { ChatInput } from "@/features/chat-page/chat-input/chat-input";
 import { chatStore, useChat } from "@/features/chat-page/chat-store";
-import { ChatDocumentModel } from '@/features/documents-page/documents-services/models';
+import { DocumentModel } from '@/features/documents-page/documents-services/models';
 import { ChatLoading } from "@/features/ui/chat/chat-message-area/chat-loading";
 import { ChatMessageArea } from "@/features/ui/chat/chat-message-area/chat-message-area";
 import ChatMessageContainer from "@/features/ui/chat/chat-message-area/chat-message-container";
@@ -20,7 +20,7 @@ import MessageContent from "./message-content";
 interface ChatPageProps {
   messages: Array<ChatMessageModel>;
   chatThread: ChatThreadModel;
-  chatDocuments: Array<ChatDocumentModel>;
+  chatDocuments: Array<DocumentModel>;
   extensions: Array<ExtensionModel>;
 }
 

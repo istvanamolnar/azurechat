@@ -1,5 +1,5 @@
 import { ChatThreadModel } from "@/features/chat-page/chat-services/models";
-import { ChatDocumentModel } from '@/features/documents-page/documents-services/models';
+import { DocumentModel } from '@/features/documents-page/documents-services/models';
 import { ExtensionModel } from "@/features/extensions-page/extension-services/models";
 import { CHAT_DEFAULT_PERSONA } from "@/features/theme/theme-config";
 import { UserRoundCog } from "lucide-react";
@@ -10,7 +10,7 @@ import { PersonaDetail } from "./persona-detail";
 
 interface Props {
   chatThread: ChatThreadModel;
-  chatDocuments: Array<ChatDocumentModel>;
+  chatDocuments: Array<DocumentModel>;
   extensions: Array<ExtensionModel>;
 }
 

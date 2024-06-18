@@ -1,4 +1,4 @@
-import { ChatDocumentModel } from '@/features/documents-page/documents-services/models';
+import { DocumentModel } from '@/features/documents-page/documents-services/models';
 import { Button } from "@/features/ui/button";
 import { ScrollArea } from "@/features/ui/scroll-area";
 import {
@@ -13,7 +13,7 @@ import { FC } from "react";
 import { useTranslation } from 'react-i18next';
 
 interface Props {
-  chatDocuments: Array<ChatDocumentModel>;
+  chatDocuments: Array<DocumentModel>;
 }
 
 export const DocumentDetail: FC<Props> = (props) => {

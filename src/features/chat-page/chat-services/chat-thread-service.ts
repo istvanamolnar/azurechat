@@ -9,7 +9,7 @@ import {
 import { RedirectToChatThread } from "@/features/common/navigation-helpers";
 import { ServerActionResponse } from "@/features/common/server-action-response";
 import { uniqueId } from "@/features/common/util";
-import { ChatDocumentModel } from '@/features/documents-page/documents-services/models';
+import { DocumentModel } from '@/features/documents-page/documents-services/models';
 import {
   CHAT_DEFAULT_PERSONA,
   NEW_CHAT_NAME,
@@ -150,7 +150,7 @@ export const SoftDeleteChatThreadForCurrentUser = async (
         await DeleteDocuments(chatThreadID);
       }
 
-      chatDocuments.forEach(async (chatDocument: ChatDocumentModel) => {
+      chatDocuments.forEach(async (chatDocument: DocumentModel) => {
         const itemToUpdate = {
           ...chatDocument,
         };

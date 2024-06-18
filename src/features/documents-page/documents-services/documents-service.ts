@@ -1,10 +1,10 @@
-import { CHAT_DOCUMENT_ATTRIBUTE, ChatDocumentModel } from '@/features/documents-page/documents-services/models';
+import { CHAT_DOCUMENT_ATTRIBUTE, DocumentModel } from '@/features/documents-page/documents-services/models';
 import { ServerActionResponse } from '@/features/common/server-action-response';
 import { DocumentsContainer } from '@/features/common/services/cosmos';
 import { SqlQuerySpec } from '@azure/cosmos';
 
 export const FindAllDocuments = async (): Promise<
-  ServerActionResponse<Array<ChatDocumentModel>>
+  ServerActionResponse<Array<DocumentModel>>
 > => {
   try {
     const querySpec: SqlQuerySpec = {
@@ -18,7 +18,7 @@ export const FindAllDocuments = async (): Promise<
     };
 
     const { resources } = await DocumentsContainer()
-      .items.query<ChatDocumentModel>(querySpec)
+      .items.query<DocumentModel>(querySpec)
       .fetchAll();
 
     return {

@@ -1,7 +1,7 @@
 "use server";
 import "server-only";
 
-import { CHAT_DOCUMENT_ATTRIBUTE, ChatDocumentModel } from "@/features/documents-page/documents-services/models";
+import { CHAT_DOCUMENT_ATTRIBUTE, DocumentModel } from "@/features/documents-page/documents-services/models";
 import { userHashedId } from "@/features/auth-page/helpers";
 import { DocumentsContainer } from "@/features/common/services/cosmos";
 
@@ -108,7 +108,7 @@ const LoadFile = async (
 
 export const FindAllChatDocuments = async (
   chatThreadID: string
-): Promise<ServerActionResponse<ChatDocumentModel[]>> => {
+): Promise<ServerActionResponse<DocumentModel[]>> => {
   try {
     const querySpec: SqlQuerySpec = {
       query:
@@ -130,7 +130,7 @@ export const FindAllChatDocuments = async (
     };
 
     const { resources } = await DocumentsContainer()
-      .items.query<ChatDocumentModel>(querySpec)
+      .items.query<DocumentModel>(querySpec)
       .fetchAll();
 
     if (resources) {
@@ -163,20 +163,21 @@ export const FindAllChatDocuments = async (
 export const CreateChatDocument = async (
   fileName: string,
   chatThreadID: string
-): Promise<ServerActionResponse<ChatDocumentModel>> => {
+): Promise<ServerActionResponse<DocumentModel>> => {
   try {
-    const modelToSave: ChatDocumentModel = {
+    const modelToSave: DocumentModel = {
       chatThreadId: chatThreadID,
-      id: uniqueId(),
-      userId: await userHashedId(),
       createdAt: new Date(),
-      type: CHAT_DOCUMENT_ATTRIBUTE,
+      id: uniqueId(),
       isDeleted: false,
+      isPublished: true,
       name: fileName,
+      type: CHAT_DOCUMENT_ATTRIBUTE,
+      userId: await userHashedId(),
     };
 
     const { resource } =
-      await DocumentsContainer().items.upsert<ChatDocumentModel>(modelToSave);
+      await DocumentsContainer().items.upsert<DocumentModel>(modelToSave);
     RevalidateCache({
       page: "chat",
       params: chatThreadID,
@@ -210,10 +211,10 @@ export const CreateChatDocument = async (
 };
 
 export async function SoftDeleteChatDocument(
-  doc: ChatDocumentModel
+  doc: DocumentModel
 ): Promise<ServerActionResponse<boolean>> {
   try {
-    const { resource } = await DocumentsContainer().items.upsert<ChatDocumentModel>(
+    const { resource } = await DocumentsContainer().items.upsert<DocumentModel>(
       {
         ...doc,
         isDeleted: true,
