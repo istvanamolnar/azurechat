@@ -162,11 +162,11 @@ export const FindAllChatDocuments = async (
 
 export const CreateChatDocument = async (
   fileName: string,
-  chatThreadID: string
+  chatThreadId: string
 ): Promise<ServerActionResponse<DocumentModel>> => {
   try {
     const modelToSave: DocumentModel = {
-      chatThreadId: chatThreadID,
+      chatThreadId,
       createdAt: new Date(),
       id: uniqueId(),
       isDeleted: false,
@@ -180,7 +180,7 @@ export const CreateChatDocument = async (
       await DocumentsContainer().items.upsert<DocumentModel>(modelToSave);
     RevalidateCache({
       page: "chat",
-      params: chatThreadID,
+      params: chatThreadId,
     });
 
     if (resource) {

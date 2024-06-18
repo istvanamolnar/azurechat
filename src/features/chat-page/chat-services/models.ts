@@ -26,7 +26,7 @@ export interface ChatThreadModel {
   createdAt: Date;
   lastMessageAt: Date;
   userId: string;
-  useName: string;
+  userName: string;
   isDeleted: boolean;
   bookmarked: boolean;
   personaMessage: string;

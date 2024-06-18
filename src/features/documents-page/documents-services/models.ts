@@ -2,6 +2,7 @@ import { refineFromEmpty } from "@/features/common/schema-validation";
 import { z } from "zod";
 
 export const CHAT_DOCUMENT_ATTRIBUTE = "CHAT_DOCUMENT";
+export const SHARED_DOCUMENT_ID = ""; // when document uploaded in central place, chatThreadId is empty and documentId is shared across all users
 
 export type DocumentModel = z.infer<typeof DocumentModelSchema>;
 

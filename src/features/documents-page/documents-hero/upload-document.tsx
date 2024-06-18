@@ -3,10 +3,11 @@ import { AttachFile } from '@/features/ui/chat/chat-input-area/attach-file';
 import { HeroButton } from '@/features/ui/hero'
 import { Upload } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { SHARED_DOCUMENT_ID } from '../documents-services/models';
 
 export const UploadDocument = () => {
   const { t } = useTranslation('data-source');
-  const chatThreadId = '';
+  const chatThreadId = SHARED_DOCUMENT_ID;
   return (
     <AttachFile
       onClick={(formData) =>

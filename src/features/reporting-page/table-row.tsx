@@ -19,7 +19,7 @@ const ChatThreadRow: React.FC<ChatThreadRowProps> = (props) => {
       }}
     >
       <TableCell className="font-medium">{chatThread.name}</TableCell>
-      <TableCell>{chatThread.useName}</TableCell>
+      <TableCell>{chatThread.userName}</TableCell>
       <TableCell>
         {new Date(chatThread.createdAt).toLocaleDateString()}
       </TableCell>

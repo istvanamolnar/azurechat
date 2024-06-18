@@ -388,7 +388,7 @@ export const CreateChatWithExtension = async (
 
     const response = await UpsertChatThread({
       name: extension.name,
-      useName: (await userSession())!.name,
+      userName: (await userSession())!.name,
       userId: await userHashedId(),
       id: "",
       createdAt: new Date(),
