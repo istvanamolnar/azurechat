@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { UploadDocument } from './upload-document';
 
 export const DocumentsHero = () => {
-  const { t } = useTranslation('data-source');
+  const { t } = useTranslation('documents');
   return (
     <Hero
       title={

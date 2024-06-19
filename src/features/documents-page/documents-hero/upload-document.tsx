@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { SHARED_DOCUMENT_ID } from '../documents-services/models';
 
 export const UploadDocument = () => {
-  const { t } = useTranslation('data-source');
+  const { t } = useTranslation('documents');
   const chatThreadId = SHARED_DOCUMENT_ID;
   return (
     <AttachFile

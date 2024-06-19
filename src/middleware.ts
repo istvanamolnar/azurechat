@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { i18nRouter } from 'next-i18n-router';
-import i18nConfig from './i18nConfig';
+// import { i18nRouter } from 'next-i18n-router';
+// import i18nConfig from './i18nConfig';
 import { getToken } from "next-auth/jwt";
 
 const requireAuth: string[] = [

@@ -65,7 +65,7 @@ export const MainMenu = async ({locale}: { locale: 'de' | 'en' }) => {
           </MenuItem>
           {user.isAdmin && (
             <>
-              <MenuItem tooltip="Data source">
+              <MenuItem tooltip={t('common:documents')}>
                 <MenuLink href="/documents" ariaLabel="Go to documents" >
                   <HardDrive {...menuIconProps} />
                 </MenuLink>

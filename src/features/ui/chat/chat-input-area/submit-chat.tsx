@@ -1,5 +1,5 @@
 import { Send } from "lucide-react";
-import React, { use } from "react";
+import React from "react";
 import { Button } from "../../button";
 import { useTranslation } from 'react-i18next';
 

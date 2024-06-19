@@ -25,8 +25,8 @@ export const ChatHome: FC<ChatPersonaProps> = async (props) => {
             <>
               <Image
                 src={"/ai-icon.png"}
-                width={50}
-                height={50}
+                width={45}
+                height={45}
                 quality={100}
                 alt="ai-icon"
               />
